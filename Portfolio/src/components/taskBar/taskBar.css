@@ -1,0 +1,25 @@
+.taskBar-box {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100vw;
+  height: 8vh;
+  background-color: black;
+}
+
+.taskBar-elements {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.taskBar-btn-home {
+    display: flex;
+}
+
+.taskBar-apps {
+    width: 50vw;
+    background-color: rgb(255, 81, 81);
+    align-items: center;
+}

@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import './home.css'
 
 function Home() {
 
   return (
     <>
+      <div className='home-box'>
+        
+        </div>
       
     </>
   )
