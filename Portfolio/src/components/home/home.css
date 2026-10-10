@@ -1,18 +1,30 @@
 .home-box {
- 
-    background-color: red;
+    width: 600px;
+    height: 450px;
 }
 
 .home-elements-box {
-    width: 250px;
     height: 250px;
-    background-color: aqua;
 }
 
 .home_elements {
-    
+    display: flex;
+    align-items: center;
+}
+
+.home-apps {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .home-btn {
-
+    font-size: 100px;
+    width: 120px;
+    margin: 10px;
+    background:none;
+    border: none;
+    color: #a855b0;
+    cursor: pointer;
 }

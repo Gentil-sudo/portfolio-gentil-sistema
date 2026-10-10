@@ -3,6 +3,7 @@ import './taskBar.css'
 import { BiArchive } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlineBedtime } from "react-icons/md";
 
 function TaskBar() {
 
@@ -18,7 +19,8 @@ function TaskBar() {
                             <div className='taskBar-btn-elements'>
                                 <button className='taskBar-btn'><BiArchive /></button>
                                 <button className='taskBar-btn'><MdOutlineEmail /></button>  
-                                <button className='taskBar-btn'><FaUserCircle/></button>           
+                                <button className='taskBar-btn'><FaUserCircle/></button>     
+                                <button className='taskBar-btn'><MdOutlineBedtime /></button>      
                             </div>
                         </div>
                     </div>
