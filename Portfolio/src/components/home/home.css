@@ -1,5 +1,18 @@
-.teste {
+.home-box {
+ 
+    background-color: red;
+}
+
+.home-elements-box {
+    width: 250px;
+    height: 250px;
     background-color: aqua;
-    width: 100vw;
-    height: 100vh;
+}
+
+.home_elements {
+    
+}
+
+.home-btn {
+
 }
