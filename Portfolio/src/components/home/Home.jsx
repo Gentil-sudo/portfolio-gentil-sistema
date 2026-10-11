@@ -1,10 +1,7 @@
 import './home.css'
-import { BiArchive } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineBedtime } from "react-icons/md";
 
-function Home() {
+function Home({ apps, onOpen }) {
 
   return (
     <>
@@ -12,10 +9,13 @@ function Home() {
         <div className='home-elements-box'>
           <section className='home-elements'>
             <div className='home-apps'>
-              <button className='home-btn'><BiArchive /></button>
-              <button className='home-btn'><MdOutlineEmail /></button>
-              <button className='home-btn'><FaUserCircle /></button>
-              <button className='home-btn'><MdOutlineBedtime /></button>
+              {apps.map(({ id, title, icon: Icon }) => (
+                <button key={id} className='home-btn' title={title} onClick={() => onOpen(id)}>
+                  <Icon />
+                  <span className='home-btn-label'>{title}</span>
+                </button>
+              ))}
+              <button className='home-btn' title='Descansar'><MdOutlineBedtime /></button>
             </div>
           </section>
         </div>

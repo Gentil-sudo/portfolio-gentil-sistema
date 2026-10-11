@@ -1,32 +1,37 @@
 
 import './taskBar.css'
-import { BiArchive } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineBedtime } from "react-icons/md";
+import Logo from "../../assets/imgs/logo.png"
 
-function TaskBar() {
+function TaskBar({ apps, activeAppId, onOpen }) {
 
     return (
         <>
             <nav className="taskBar-box">
                 <div className='taskBar-elements'>
                     <div className='taskBar-element-Home'>
-                        <button className='taskBar-btn-Home'>Home</button>
+                        <button className='taskBar-btn-Home'><img src={Logo} alt="Logo" className='home-img' /></button>
                     </div>
                     <div className='taskBar-apps'>
                         <div className='taskBar-btns-box'>
                             <div className='taskBar-btn-elements'>
-                                <button className='taskBar-btn'><BiArchive /></button>
-                                <button className='taskBar-btn'><MdOutlineEmail /></button>  
-                                <button className='taskBar-btn'><FaUserCircle/></button>     
-                                <button className='taskBar-btn'><MdOutlineBedtime /></button>      
+                                {apps.map(({ id, title, icon: Icon }) => (
+                                    <button
+                                        key={id}
+                                        className={`taskBar-btn ${activeAppId === id ? 'taskBar-btn-active' : ''}`}
+                                        title={title}
+                                        onClick={() => onOpen(id)}
+                                    >
+                                        <Icon />
+                                    </button>
+                                ))}
+                                <button className='taskBar-btn' title='Descansar'><MdOutlineBedtime /></button>
                             </div>
                         </div>
                     </div>
                   
-                    <div>
-                        <button className='taskBar-btn-back'>||</button>
+                    <div className='taskBar-btn-back-box'>
+                        <button className='taskBar-btn-back'>|</button>
                     </div>
                 </div>
             </nav>
