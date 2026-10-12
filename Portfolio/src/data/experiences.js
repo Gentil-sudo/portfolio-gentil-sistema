@@ -1,5 +1,4 @@
-// Experiências: profissionais, estágios, freelas, open source e eventos técnicos.
-// status: 'atual' (em andamento), 'em-breve' (confirmado, ainda vai acontecer) ou 'concluido'
+
 const experiences = [
     {
         organization: 'NASA Space Apps Challenge',

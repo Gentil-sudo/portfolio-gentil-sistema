@@ -1,7 +1,5 @@
 const GITHUB_USER = 'Gentil-sudo'
 
-// Linha do tempo: do mais antigo para o mais recente.
-// "image" aceita um print/GIF próprio (ex: import de src/assets). Sem ele, usa o card gerado pelo GitHub.
 const projects = [
     {
         repo: 'cursojs',

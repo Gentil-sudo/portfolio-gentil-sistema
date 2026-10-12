@@ -1,4 +1,3 @@
-// Textos da seção "Sobre Mim" em português e inglês
 const about = {
     pt: {
         greeting: 'Olá, eu sou',
@@ -18,6 +17,7 @@ const about = {
             title: 'Linguagens que mais uso (WakaTime)',
             loadingText: 'Carregando estatísticas...',
             errorText: 'Não foi possível carregar as estatísticas agora.',
+            emptyText: 'Ainda coletando dados. Volte em breve!',
         },
         switchLabel: 'Idioma',
     },
@@ -39,6 +39,7 @@ const about = {
             title: 'Languages I use the most (WakaTime)',
             loadingText: 'Loading stats...',
             errorText: "Couldn't load the stats right now.",
+            emptyText: 'Still collecting data. Check back soon!',
         },
         switchLabel: 'Language',
     },

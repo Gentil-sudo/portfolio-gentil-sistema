@@ -16,28 +16,39 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
+    padding-top: 16px;
 }
 
-.home-btn {
-    font-size: 50px;
-    width: 100px;
-    margin: 10px;
-    background:none;
-    border: none;
-    color: var(--accent-2);
-    cursor: pointer;
-}
 .home-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 100px;
+    height: 90px;
+    margin: 0 10px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--desktop-icon);
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+    cursor: pointer;
+}
+
+.home-btn svg {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
 }
 
 .home-btn-label {
+    width: 100%;
+    text-align: center;
+    line-height: 1.2;
     font-family: sans-serif;
     font-size: 13px;
-    color: var(--text);
-    text-shadow: 0 1px 3px var(--overlay);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.6);
 }

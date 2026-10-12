@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const LANGUAGES_URL = import.meta.env.VITE_WAKATIME_LANGUAGES_URL
 const MAX_LANGUAGES = 6
 
-function WakaTime({ title, loadingText, errorText }) {
+function WakaTime({ title, loadingText, errorText, emptyText }) {
     const [languages, setLanguages] = useState(null)
     const [error, setError] = useState(false)
 
@@ -27,7 +27,8 @@ function WakaTime({ title, loadingText, errorText }) {
             <h3 className='wakatime-title'>{title}</h3>
             {error && <p className='wakatime-message'>{errorText}</p>}
             {!error && !languages && <p className='wakatime-message'>{loadingText}</p>}
-            {languages && (
+            {languages?.length === 0 && <p className='wakatime-message'>{emptyText}</p>}
+            {languages?.length > 0 && (
                 <ul className='wakatime-list'>
                     {languages.map(({ name, percent, color }) => (
                         <li key={name} className='wakatime-item'>

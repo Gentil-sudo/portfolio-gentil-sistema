@@ -10,7 +10,7 @@ const emptyForm = { name: '', email: '', subject: '', message: '' }
 
 function Contact() {
     const [form, setForm] = useState(emptyForm)
-    const [status, setStatus] = useState('idle') 
+    const [status, setStatus] = useState('idle')
 
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -27,7 +27,6 @@ function Contact() {
                 body: JSON.stringify({
                     access_key: ACCESS_KEY,
                     from_name: 'Portfólio',
-                 
                     botcheck: event.target.botcheck.checked,
                     ...form,
                     subject: form.subject || `Nova mensagem de ${form.name}`,

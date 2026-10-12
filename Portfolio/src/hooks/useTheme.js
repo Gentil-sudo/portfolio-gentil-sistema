@@ -6,9 +6,7 @@ function getInitialTheme() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY)
         if (saved === 'dark' || saved === 'light') return saved
-    } catch {
-        // localStorage indisponível (aba anônima, etc.)
-    }
+    } catch {}
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
 }
 
@@ -19,9 +17,7 @@ function useTheme() {
         document.documentElement.dataset.theme = theme
         try {
             localStorage.setItem(STORAGE_KEY, theme)
-        } catch {
-            // ignora
-        }
+        } catch {}
     }, [theme])
 
     function toggleTheme() {

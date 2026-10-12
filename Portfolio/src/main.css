@@ -4,10 +4,10 @@
   margin: 0;
 }
 
-/* Cores de cada tema — trocadas pelo atributo data-theme no <html> */
 :root,
 :root[data-theme='dark'] {
   --overlay: rgba(0, 0, 0, 0.4);
+  --desktop-icon: #a855b0;
   --surface: rgba(20, 12, 40, 0.85);
   --surface-soft: rgba(168, 85, 176, 0.12);
   --taskbar-base: rgba(10, 6, 24, 0.35);
@@ -20,10 +20,11 @@
 }
 
 :root[data-theme='light'] {
-  --overlay: rgba(255, 255, 255, 0.45);
-  --surface: rgba(250, 246, 255, 0.92);
-  --surface-soft: rgba(168, 85, 176, 0.1);
-  --taskbar-base: rgba(255, 255, 255, 0.6);
+  --overlay: rgba(120, 60, 140, 0.08);
+  --desktop-icon: #f08ccf;
+  --surface: rgba(232, 218, 246, 0.88);
+  --surface-soft: rgba(168, 85, 176, 0.14);
+  --taskbar-base: rgba(238, 228, 250, 0.82);
   --text: #2a1840;
   --text-muted: #6a5a80;
   --border-soft: rgba(106, 76, 147, 0.3);

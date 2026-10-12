@@ -9,7 +9,6 @@ import Contact from './components/contact/Contact'
 import apps from './data/apps'
 import useTheme from './hooks/useTheme'
 
-// Conteúdo que cada app abre dentro do Explorer
 const appContents = {
     projetos: <Projects />,
     experiencias: <Experiences />,
@@ -26,7 +25,6 @@ function App() {
     const content = openApp && appContents[openApp.id]
 
     function handleOpen(id) {
-        // Clicar no app já aberto (e visível) minimiza, igual à barra do Windows
         if (id === openAppId && !minimized) {
             setMinimized(true)
             return

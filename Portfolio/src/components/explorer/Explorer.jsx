@@ -17,7 +17,6 @@ function Explorer({ app, hidden, onClose, onMinimize, children }) {
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [onClose])
 
-    // Arrastar a janela pela barra de título
     function handlePointerDown(event) {
         if (maximized || event.target.closest('button')) return
         event.currentTarget.setPointerCapture(event.pointerId)
