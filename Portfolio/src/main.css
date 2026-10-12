@@ -4,14 +4,43 @@
   margin: 0;
 }
 
+/* Cores de cada tema — trocadas pelo atributo data-theme no <html> */
+:root,
+:root[data-theme='dark'] {
+  --overlay: rgba(0, 0, 0, 0.4);
+  --surface: rgba(20, 12, 40, 0.85);
+  --surface-soft: rgba(168, 85, 176, 0.12);
+  --taskbar-base: rgba(10, 6, 24, 0.35);
+  --text: #e8e0f0;
+  --text-muted: #b9a8cc;
+  --border-soft: rgba(168, 85, 176, 0.3);
+  --accent: #e0449e;
+  --accent-2: #a855b0;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --overlay: rgba(255, 255, 255, 0.45);
+  --surface: rgba(250, 246, 255, 0.92);
+  --surface-soft: rgba(168, 85, 176, 0.1);
+  --taskbar-base: rgba(255, 255, 255, 0.6);
+  --text: #2a1840;
+  --text-muted: #6a5a80;
+  --border-soft: rgba(106, 76, 147, 0.3);
+  --accent: #c42a85;
+  --accent-2: #8a3d93;
+  color-scheme: light;
+}
+
 .main {
   height: 100vh;
   width: 100vw;
   background-image:
-  linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-  url('./assets/videos/fundo.gif');
+  linear-gradient(var(--overlay), var(--overlay)),
+  url('./assets/videos/fundo.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  transition: background-image 0.3s ease;
 }

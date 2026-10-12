@@ -1,0 +1,119 @@
+const GITHUB_USER = 'Gentil-sudo'
+
+// Linha do tempo: do mais antigo para o mais recente.
+// "image" aceita um print/GIF próprio (ex: import de src/assets). Sem ele, usa o card gerado pelo GitHub.
+const projects = [
+    {
+        repo: 'cursojs',
+        name: 'Curso de JavaScript',
+        date: '2021-02',
+        description: 'Primeiros passos na programação web: exercícios de HTML, CSS e JavaScript puro.',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+    },
+    {
+        repo: 'paintjs',
+        name: 'Paint JS',
+        date: '2023-09',
+        description: 'Aplicação de desenho no navegador, inspirada no Paint, feita com JavaScript puro.',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+    },
+    {
+        repo: 'login-react',
+        name: 'Login React',
+        date: '2024-07',
+        description: 'Primeira tela de login feita com React, focada no front-end.',
+        technologies: ['React', 'JavaScript', 'CSS', 'React Icons'],
+    },
+    {
+        repo: 'node-api',
+        name: 'Node API',
+        date: '2024-07',
+        description: 'API REST feita com Node.js e Express, usando Prisma como ORM e MongoDB como banco de dados.',
+        technologies: ['Node.js', 'Express', 'Prisma', 'MongoDB'],
+    },
+    {
+        repo: 'Cadastro-Api-React',
+        name: 'Cadastro com API',
+        date: '2024-07',
+        description: 'Front-end de cadastro de usuários em React consumindo uma API com Axios.',
+        technologies: ['React', 'JavaScript', 'Axios', 'CSS'],
+    },
+    {
+        repo: 'gerency-react',
+        name: 'Gerency',
+        date: '2024-07',
+        description: 'Gerenciador de finanças pessoais feito em React (versão beta).',
+        technologies: ['React', 'React Router', 'JavaScript', 'CSS'],
+    },
+    {
+        repo: 'img-generator',
+        name: 'Gerador de Imagem',
+        date: '2024-07',
+        description: 'Gerador de imagens em React que permite montar e exportar a imagem com html2canvas.',
+        technologies: ['React', 'React Router', 'html2canvas', 'CSS'],
+    },
+    {
+        repo: 'Movie-List-Api',
+        name: 'Movie List',
+        date: '2024-08',
+        description: 'Lista de filmes em Next.js consumindo uma API externa de filmes.',
+        technologies: ['Next.js', 'TypeScript', 'Sass', 'Axios'],
+    },
+    {
+        repo: 'receitas-de-minas',
+        name: 'Receitas de Minas',
+        date: '2026-03',
+        description: 'Sistema web para gerenciar receitas típicas mineiras.',
+        technologies: ['HTML', 'CSS'],
+    },
+    {
+        repo: 'trabalho-pratico-2',
+        name: 'Trabalho Prático DIW',
+        date: '2026-06',
+        description: 'Trabalho prático da disciplina de DIW (PUC Minas) com CRUD usando JSON Server como back-end.',
+        technologies: ['HTML', 'CSS', 'JavaScript', 'JSON Server'],
+    },
+    {
+        repo: 'pizzaria-next',
+        name: 'Pizzaria Next',
+        date: '2026-07',
+        description: 'Sistema de pizzaria com cadastro, login, cardápio e carrinho de compras, com banco de dados via Drizzle ORM.',
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Drizzle ORM'],
+        demo: 'https://pizzaria-next-sandy.vercel.app',
+    },
+    {
+        repo: 'calculadora-next',
+        name: 'Calculadora Next',
+        date: '2026-07',
+        description: 'Calculadora feita em Next.js para consolidar a lógica de programação.',
+        technologies: ['Next.js', 'TypeScript', 'React'],
+    },
+    {
+        repo: 'ApiClima-diaw-enzo-gentil-rafael-gomes',
+        name: 'API Clima',
+        date: '2026-08',
+        description: 'API de clima desenvolvida em Java para a disciplina de DIAW, em dupla com Rafael Gomes.',
+        technologies: ['Java'],
+    },
+    {
+        repo: 'Pizzaria-java',
+        name: 'Pizzaria Java',
+        date: '2026-08',
+        description: 'Estudo particular de Java e orientação a objetos com um sistema de pizzaria.',
+        technologies: ['Java', 'POO'],
+    },
+    {
+        repo: 'CallTabs-Cemig-Saude',
+        name: 'CallTabs Cemig Saúde',
+        date: '2026-09',
+        description: 'Aplicação web para a Cemig Saúde, publicada na Vercel.',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        demo: 'https://call-tabs-cemig-saude.vercel.app',
+    },
+].map((project) => ({
+    ...project,
+    github: `https://github.com/${GITHUB_USER}/${project.repo}`,
+    image: project.image ?? `https://opengraph.githubassets.com/1/${GITHUB_USER}/${project.repo}`,
+}))
+
+export default projects

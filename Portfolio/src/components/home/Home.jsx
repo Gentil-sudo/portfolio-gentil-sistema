@@ -1,7 +1,7 @@
 import './home.css'
-import { MdOutlineBedtime } from "react-icons/md";
+import ThemeButton from '../themeButton/ThemeButton'
 
-function Home({ apps, onOpen }) {
+function Home({ apps, onOpen, theme, onToggleTheme }) {
 
   return (
     <>
@@ -15,7 +15,7 @@ function Home({ apps, onOpen }) {
                   <span className='home-btn-label'>{title}</span>
                 </button>
               ))}
-              <button className='home-btn' title='Descansar'><MdOutlineBedtime /></button>
+              <ThemeButton className='home-btn' theme={theme} onToggle={onToggleTheme} showLabel />
             </div>
           </section>
         </div>

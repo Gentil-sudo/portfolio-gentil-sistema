@@ -1,0 +1,87 @@
+.experiences-box {
+    color: var(--text);
+}
+
+.experiences-title {
+    margin-bottom: 24px;
+    font-size: 22px;
+    color: var(--accent);
+}
+
+.experiences-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+}
+
+.experiences-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 20px;
+    background-color: var(--surface-soft);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experiences-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 12px rgba(224, 68, 158, 0.35);
+}
+
+.experiences-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.experiences-header h3 {
+    font-size: 18px;
+}
+
+.experiences-role {
+    font-size: 14px;
+    color: var(--accent-2);
+}
+
+.experiences-status {
+    padding: 2px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+}
+
+.experiences-status-atual {
+    color: #2fb37a;
+}
+
+.experiences-status-em-breve {
+    color: var(--accent);
+}
+
+.experiences-status-concluido {
+    color: var(--text-muted);
+}
+
+.experiences-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.experiences-description {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .experiences-header {
+        flex-direction: column;
+    }
+}

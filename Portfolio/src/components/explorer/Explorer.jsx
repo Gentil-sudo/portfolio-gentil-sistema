@@ -9,7 +9,6 @@ function Explorer({ app, hidden, onClose, onMinimize, children }) {
 
     const Icon = app.icon
 
-    // ESC fecha a janela
     useEffect(() => {
         function handleKeyDown(event) {
             if (event.key === 'Escape') onClose()

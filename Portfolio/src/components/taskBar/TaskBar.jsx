@@ -1,9 +1,9 @@
 
 import './taskBar.css'
-import { MdOutlineBedtime } from "react-icons/md";
+import ThemeButton from '../themeButton/ThemeButton'
 import Logo from "../../assets/imgs/logo.png"
 
-function TaskBar({ apps, activeAppId, onOpen }) {
+function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme }) {
 
     return (
         <>
@@ -25,7 +25,7 @@ function TaskBar({ apps, activeAppId, onOpen }) {
                                         <Icon />
                                     </button>
                                 ))}
-                                <button className='taskBar-btn' title='Descansar'><MdOutlineBedtime /></button>
+                                <ThemeButton className='taskBar-btn' theme={theme} onToggle={onToggleTheme} />
                             </div>
                         </div>
                     </div>

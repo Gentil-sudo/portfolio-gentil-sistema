@@ -1,0 +1,145 @@
+.contact-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 420px;
+    background-color: var(--surface-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    overflow: hidden;
+    color: var(--text);
+}
+
+.contact-header {
+    padding: 12px 16px;
+    background: linear-gradient(
+        90deg,
+        rgba(224, 68, 158, 0.2) 0%,
+        rgba(168, 85, 176, 0.2) 35%,
+        rgba(106, 76, 147, 0.2) 65%,
+        rgba(74, 90, 138, 0.2) 100%
+    );
+}
+
+.contact-header h2 {
+    font-size: 16px;
+}
+
+.contact-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.contact-label {
+    width: 64px;
+    flex-shrink: 0;
+    padding: 10px 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.contact-to {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.contact-field input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+}
+
+.contact-field:focus-within {
+    border-bottom-color: var(--accent);
+}
+
+.contact-message {
+    flex: 1;
+    min-height: 160px;
+    padding: 16px;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1.5;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--text);
+}
+
+.contact-field input::placeholder,
+.contact-message::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Honeypot anti-spam: fica fora da tela */
+.contact-botcheck {
+    position: absolute;
+    left: -9999px;
+}
+
+.contact-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.contact-send {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #e0449e 0%, #a855b0 100%);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-send:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(224, 68, 158, 0.5);
+}
+
+.contact-send:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.contact-status {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.contact-status a,
+.contact-fallback a {
+    color: var(--accent);
+}
+
+.contact-fallback {
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.contact-fallback svg {
+    font-size: 40px;
+    color: var(--accent);
+}
