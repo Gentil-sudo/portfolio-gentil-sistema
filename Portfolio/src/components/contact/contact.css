@@ -142,3 +142,68 @@
     font-size: 40px;
     color: var(--accent);
 }
+
+.contact-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+.contact-page .contact-box {
+    flex: 1;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    background-color: var(--surface-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-link svg {
+    font-size: 20px;
+    color: var(--accent);
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(224, 68, 158, 0.35);
+    outline: none;
+}
+
+.contact-link-whatsapp svg {
+    color: #25d366;
+}
+
+.contact-link-linkedin svg {
+    color: #0a66c2;
+}
+
+@media (max-width: 768px) {
+    .contact-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .contact-link {
+        justify-content: center;
+    }
+}

@@ -23,9 +23,11 @@
 
 .taskBar-elements {
     display: flex;
-    width: 100%;
     align-items: center;
-    margin: 10px;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .taskBar-element-Home {
@@ -38,6 +40,7 @@
 .taskBar-btn-Home {
     height: 60px;
     width: 70px;
+    flex: none;
     background-color: rgba(36, 14, 178, 0.086);
     border: 3px solid transparent;
     border-image: linear-gradient(135deg, #e0449e 0%, #a855b0 35%, #6a4c93 65%, #4a5a8a 100%) 1;
@@ -54,34 +57,26 @@
 
 .taskBar-apps {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    width: 80vw;
-    height: 80px;
-}
-
-.taskBar-btns {
-    height: 70px;
-    width: 100px;
-}
-
-.taskBar-btn-box {
-    height: 50px;
-    width: 30px;
-    font-size: 40px;
+    min-width: 0;
 }
 
 .taskBar-btn-elements {
     display: flex;
     gap: 8px;
-    width: 50px;
 }
 
-.taskBar-btn{
-    width: 280px;
+.taskBar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 56px;
     height: 60px;
     padding: 5px;
-    font-size: 45px;
+    font-size: 40px;
     border-radius: 8px;
     border: none;
     border-bottom: 3px solid transparent;
@@ -93,9 +88,8 @@
 
 .taskBar-btn-back-box {
     display: flex;
-    justify-content: end;
-    width: 200px;
-
+    justify-content: flex-end;
+    width: 70px;
 }
 
 .taskBar-btn-back {
@@ -136,4 +130,38 @@
 .taskBar-btn-active {
     background-color: rgba(224, 68, 158, 0.15);
     color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .taskBar-box {
+        height: 64px;
+    }
+
+    .taskBar-elements {
+        padding: 0 6px;
+    }
+
+    .taskBar-btn-Home {
+        width: 52px;
+        height: 48px;
+    }
+
+    .home-img {
+        width: 42px;
+        height: 38px;
+    }
+
+    .taskBar-btn-elements {
+        gap: 4px;
+    }
+
+    .taskBar-btn {
+        width: 46px;
+        height: 48px;
+        font-size: 30px;
+    }
+
+    .taskBar-btn-back-box {
+        display: none;
+    }
 }

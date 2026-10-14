@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Home from './components/home/Home'
 import TaskBar from './components/taskBar/TaskBar'
 import Explorer from './components/explorer/Explorer'
@@ -6,8 +6,19 @@ import Projects from './components/projects/Projects'
 import Experiences from './components/experiences/Experiences'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
+import Boot from './components/boot/Boot'
+import Login from './components/login/Login'
 import apps from './data/apps'
 import useTheme from './hooks/useTheme'
+
+const SESSION_KEY = 'portfolio-signed-in'
+
+function getInitialStage() {
+    try {
+        if (sessionStorage.getItem(SESSION_KEY)) return 'desktop'
+    } catch {}
+    return 'boot'
+}
 
 const appContents = {
     projetos: <Projects />,
@@ -20,6 +31,15 @@ function App() {
     const [openAppId, setOpenAppId] = useState(null)
     const [minimized, setMinimized] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const [stage, setStage] = useState(getInitialStage)
+
+    const handleBootDone = useCallback(() => setStage('login'), [])
+    const handleLoginDone = useCallback(() => {
+        setStage('desktop')
+        try {
+            sessionStorage.setItem(SESSION_KEY, '1')
+        } catch {}
+    }, [])
 
     const openApp = apps.find((app) => app.id === openAppId)
     const content = openApp && appContents[openApp.id]
@@ -61,6 +81,8 @@ function App() {
                 theme={theme}
                 onToggleTheme={toggleTheme}
             />
+            {stage !== 'desktop' && <Login onDone={handleLoginDone} />}
+            {stage === 'boot' && <Boot onDone={handleBootDone} />}
         </>
     )
 }

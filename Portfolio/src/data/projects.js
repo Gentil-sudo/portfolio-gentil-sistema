@@ -58,6 +58,14 @@ const projects = [
         technologies: ['Next.js', 'TypeScript', 'Sass', 'Axios'],
     },
     {
+        owner: 'rafaelgomes77oliveira-ux',
+        repo: 'Pygame-Castle-Defenders',
+        name: 'Castle Defenders',
+        date: '2026-02',
+        description: 'Jogo em Pygame feito em grupo de quatro pessoas: defenda a torre dos inimigos clicando para atacar, junte moedas e compre melhorias enquanto chefões aumentam a dificuldade.',
+        technologies: ['Python', 'Pygame', 'Pytest'],
+    },
+    {
         repo: 'receitas-de-minas',
         name: 'Receitas de Minas',
         date: '2026-03',
@@ -108,10 +116,10 @@ const projects = [
         technologies: ['HTML', 'CSS', 'JavaScript'],
         demo: 'https://call-tabs-cemig-saude.vercel.app',
     },
-].map((project) => ({
+].map(({ owner = GITHUB_USER, ...project }) => ({
     ...project,
-    github: `https://github.com/${GITHUB_USER}/${project.repo}`,
-    image: project.image ?? `https://opengraph.githubassets.com/1/${GITHUB_USER}/${project.repo}`,
+    github: `https://github.com/${owner}/${project.repo}`,
+    image: project.image ?? `https://opengraph.githubassets.com/1/${owner}/${project.repo}`,
 }))
 
 export default projects

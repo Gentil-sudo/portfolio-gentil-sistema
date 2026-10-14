@@ -1,8 +1,7 @@
 import './about.css'
 import { useState } from 'react'
-import { FaGithub } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
 import about from '../../data/about'
+import contacts from '../../data/contacts'
 import WakaTime from '../wakatime/WakaTime'
 
 function About () {
@@ -34,12 +33,18 @@ function About () {
                     <h2 className='about-name'>Enzo Gentil Xavier Barroso</h2>
                     <p className='about-role'>{text.role}</p>
                     <div className='about-links'>
-                        <a href='https://github.com/Gentil-sudo' target='_blank' rel='noreferrer' title='GitHub'>
-                            <FaGithub />
-                        </a>
-                        <a href='mailto:enzogentil.profissional@gmail.com' title='E-mail'>
-                            <MdOutlineEmail />
-                        </a>
+                        {contacts.map(({ id, label, href, icon: Icon }) => (
+                            <a
+                                key={id}
+                                href={href}
+                                title={label}
+                                aria-label={label}
+                                target={href.startsWith('mailto:') ? undefined : '_blank'}
+                                rel='noreferrer'
+                            >
+                                <Icon />
+                            </a>
+                        ))}
                     </div>
                 </div>
             </header>
