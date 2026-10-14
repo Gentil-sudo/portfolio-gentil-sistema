@@ -1,4 +1,4 @@
-import './StartMenu.css'
+import './startMenu.css'
 import { useEffect, useRef, useState } from 'react'
 import { MdLockOutline, MdOutlinePowerSettingsNew, MdRestartAlt } from "react-icons/md";
 import Logo from '../../assets/imgs/logo.png'

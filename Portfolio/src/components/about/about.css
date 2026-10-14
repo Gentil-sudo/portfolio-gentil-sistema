@@ -139,3 +139,9 @@
         font-size: 30px;
     }
 }
+
+/* Rodapé com as estatísticas do WakaTime */
+.about-footer {
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+}

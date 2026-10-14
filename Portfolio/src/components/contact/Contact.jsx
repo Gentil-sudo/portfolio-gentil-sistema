@@ -1,4 +1,4 @@
-import './Contact.css'
+import './contact.css'
 import { useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";

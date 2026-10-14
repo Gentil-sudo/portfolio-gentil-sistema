@@ -1,4 +1,4 @@
-import './Explorer.css'
+import './explorer.css'
 import { useEffect, useRef, useState } from 'react'
 import { VscChromeMinimize, VscChromeMaximize, VscChromeRestore, VscChromeClose } from "react-icons/vsc";
 

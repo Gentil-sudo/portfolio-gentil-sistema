@@ -1,8 +1,8 @@
-import './About.css'
+import './about.css'
 import { useState } from 'react'
 import about from '../../data/about'
 import contacts from '../../data/contacts'
-import WakaTime from '../wakatime/WakaTime'
+import WakaTimeStats from '../wakaTimeStats/WakaTimeStats'
 
 function About () {
     const [language, setLanguage] = useState('pt')
@@ -67,7 +67,10 @@ function About () {
                 </dl>
             </section>
 
-            <WakaTime {...text.wakatime} />
+            <footer className='about-footer'>
+                <h3 className='about-info-title'>{text.wakatime.title}</h3>
+                <WakaTimeStats />
+            </footer>
         </div>
     )
 }

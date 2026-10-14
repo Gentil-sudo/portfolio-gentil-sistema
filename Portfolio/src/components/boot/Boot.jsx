@@ -1,4 +1,4 @@
-import './Boot.css'
+import './boot.css'
 import { useEffect, useState } from 'react'
 import Logo from '../../assets/imgs/logo.png'
 
