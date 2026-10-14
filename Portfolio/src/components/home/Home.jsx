@@ -1,4 +1,4 @@
-import './home.css'
+import './Home.css'
 import ThemeButton from '../themeButton/ThemeButton'
 
 function Home({ apps, onOpen, theme, onToggleTheme }) {

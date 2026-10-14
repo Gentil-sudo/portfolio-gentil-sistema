@@ -1,4 +1,4 @@
-import './about.css'
+import './About.css'
 import { useState } from 'react'
 import about from '../../data/about'
 import contacts from '../../data/contacts'

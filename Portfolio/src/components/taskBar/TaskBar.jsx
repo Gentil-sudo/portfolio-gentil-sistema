@@ -1,5 +1,5 @@
 
-import './taskBar.css'
+import './TaskBar.css'
 import ThemeButton from '../themeButton/ThemeButton'
 import StartMenu from "../startMenu/StartMenu"
 

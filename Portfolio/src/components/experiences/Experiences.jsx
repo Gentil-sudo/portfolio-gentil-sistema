@@ -1,4 +1,4 @@
-import './experiences.css'
+import './Experiences.css'
 import experiences from '../../data/experiences'
 
 const statusLabels = {
