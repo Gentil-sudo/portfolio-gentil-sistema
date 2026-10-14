@@ -1,9 +1,12 @@
 
 import './taskBar.css'
 import ThemeButton from '../themeButton/ThemeButton'
+import LanguageButton from '../languageButton/LanguageButton'
 import StartMenu from "../startMenu/StartMenu"
+import { useLanguage } from '../../i18n/LanguageContext'
 
 function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, onLock, onRestart, onShowDesktop }) {
+    const { t } = useLanguage()
 
     return (
         <>
@@ -15,23 +18,25 @@ function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, on
                     <div className='taskBar-apps'>
                         <div className='taskBar-btns-box'>
                             <div className='taskBar-btn-elements'>
-                                {apps.map(({ id, title, icon: Icon }) => (
+                                {apps.map(({ id, icon: Icon }) => (
                                     <button
                                         key={id}
                                         className={`taskBar-btn ${activeAppId === id ? 'taskBar-btn-active' : ''}`}
-                                        title={title}
+                                        title={t.apps[id]}
+                                        aria-label={t.apps[id]}
                                         onClick={() => onOpen(id)}
                                     >
                                         <Icon />
                                     </button>
                                 ))}
                                 <ThemeButton className='taskBar-btn' theme={theme} onToggle={onToggleTheme} />
+                                <LanguageButton className='taskBar-btn' />
                             </div>
                         </div>
                     </div>
-                  
+
                     <div className='taskBar-btn-back-box'>
-                        <button className='taskBar-btn-back' title='Mostrar área de trabalho' aria-label='Mostrar área de trabalho' onClick={onShowDesktop}>|</button>
+                        <button className='taskBar-btn-back' title={t.taskBar.showDesktop} aria-label={t.taskBar.showDesktop} onClick={onShowDesktop}>|</button>
                     </div>
                 </div>
             </nav>

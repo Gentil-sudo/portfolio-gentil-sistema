@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { IoArrowForward } from "react-icons/io5";
 import Wallpaper from '../../assets/videos/fundo.webp'
 import Profile from '../../assets/imgs/profile.webp'
+import { LANGUAGES, useLanguage } from '../../i18n/LanguageContext'
 
 const USER_NAME = 'Enzo Gentil'
 const SIGN_IN_DURATION = 1200
@@ -23,6 +24,7 @@ function Login({ onDone }) {
     const [step, setStep] = useState('lock')
     const now = useClock()
     const enterButton = useRef(null)
+    const { t, language, setLanguage } = useLanguage()
 
     useEffect(() => {
         if (step !== 'lock') return
@@ -46,8 +48,8 @@ function Login({ onDone }) {
         return () => clearTimeout(doneTimer)
     }, [step, onDone])
 
-    const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
-    const date = now.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })
+    const time = now.toLocaleTimeString(t.locale, { hour: '2-digit', minute: '2-digit' })
+    const date = now.toLocaleDateString(t.locale, { weekday: 'long', day: 'numeric', month: 'long' })
     const showUser = step !== 'lock'
 
     return (
@@ -56,14 +58,35 @@ function Login({ onDone }) {
             style={{ backgroundImage: `url(${Wallpaper})` }}
             onClick={() => step === 'lock' && setStep('user')}
         >
+            {/* Trocar o idioma aqui não desbloqueia a tela */}
+            <div
+                className='login-language'
+                role='group'
+                aria-label={t.language.label}
+                onClick={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
+            >
+                {LANGUAGES.map((code) => (
+                    <button
+                        key={code}
+                        type='button'
+                        className={code === language ? 'login-language-active' : ''}
+                        aria-pressed={code === language}
+                        onClick={() => setLanguage(code)}
+                    >
+                        {code.toUpperCase()}
+                    </button>
+                ))}
+            </div>
+
             <div className='login-lock' aria-hidden={showUser}>
                 <time className='login-time'>{time}</time>
                 <p className='login-date'>{date}</p>
-                <p className='login-hint'>Clique ou pressione qualquer tecla para entrar</p>
+                <p className='login-hint'>{t.login.hint}</p>
             </div>
 
             <div className='login-user' aria-hidden={!showUser}>
-                <img src={Profile} alt={`Foto de ${USER_NAME}`} className='login-avatar' />
+                <img src={Profile} alt={t.login.photo(USER_NAME)} className='login-avatar' />
                 <h1 className='login-name'>{USER_NAME}</h1>
 
                 {step === 'user' ? (
@@ -73,11 +96,11 @@ function Login({ onDone }) {
                         onClick={() => setStep('signing-in')}
                         tabIndex={showUser ? 0 : -1}
                     >
-                        Entrar <IoArrowForward />
+                        {t.login.enter} <IoArrowForward />
                     </button>
                 ) : (
                     <p className='login-welcome' role='status'>
-                        <span className='login-spinner' aria-hidden='true' /> Bem-vindo
+                        <span className='login-spinner' aria-hidden='true' /> {t.login.welcome}
                     </p>
                 )}
             </div>

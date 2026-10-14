@@ -17,6 +17,7 @@
 //
 // O nome do arquivo começa com "_" para a Vercel NÃO transformá-lo em rota.
 
+import WAKATIME_CONFIG from "../src/config/wakatimeConfig.js";
 import { fetchWakaTime, hasAccessToken } from "./_oauth.js";
 
 export const WAKATIME_PATH = "/api/wakatime";
@@ -61,6 +62,21 @@ const toItems = (list = [], limit = 20) =>
       percent,
     }));
 
+// Ferramentas de IA (WAKATIME_CONFIG.HIDDEN_EDITORS) não vão para a tela
+const editorKey = (name) => String(name ?? "").toLowerCase().replace(/[\s_-]/g, "");
+const HIDDEN_EDITORS = new Set(WAKATIME_CONFIG.HIDDEN_EDITORS.map(editorKey));
+export const isHiddenEditor = (name) => HIDDEN_EDITORS.has(editorKey(name));
+
+// Tira os editores escondidos e refaz as porcentagens entre os que sobraram
+function visibleEditors(list = []) {
+  const kept = list.filter((item) => !isHiddenEditor(item.name));
+  const total = kept.reduce((sum, item) => sum + item.total_seconds, 0);
+  return kept.map((item) => ({
+    ...item,
+    percent: total ? Math.round((item.total_seconds / total) * 10000) / 100 : 0,
+  }));
+}
+
 function normalize(data, today, mode) {
   return {
     mode, // "oauth" ou "public"
@@ -79,9 +95,9 @@ function normalize(data, today, mode) {
       ? { date: data.best_day.date, seconds: Math.round(data.best_day.total_seconds) }
       : null,
     languages: toItems(data.languages),
-    editors: toItems(data.editors, 6),
+    editors: toItems(visibleEditors(data.editors), 6),
     operatingSystems: toItems(data.operating_systems, 5),
-    categories: toItems(data.categories, 6),
+    // Categorias ("Coding", "AI Coding"...) não são enviadas: mostram o uso de IA
     projects: toItems(data.projects, 10),
     today,
   };

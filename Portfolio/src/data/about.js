@@ -15,11 +15,7 @@ const about = {
         ],
         wakatime: {
             title: 'Linguagens que mais uso (WakaTime)',
-            loadingText: 'Carregando estatísticas...',
-            errorText: 'Não foi possível carregar as estatísticas agora.',
-            emptyText: 'Ainda coletando dados. Volte em breve!',
         },
-        switchLabel: 'Idioma',
     },
     en: {
         greeting: "Hi, I'm",
@@ -37,11 +33,7 @@ const about = {
         ],
         wakatime: {
             title: 'Languages I use the most (WakaTime)',
-            loadingText: 'Loading stats...',
-            errorText: "Couldn't load the stats right now.",
-            emptyText: 'Still collecting data. Check back soon!',
         },
-        switchLabel: 'Language',
     },
 }
 

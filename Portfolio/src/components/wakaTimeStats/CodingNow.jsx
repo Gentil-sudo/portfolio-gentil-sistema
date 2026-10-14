@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiClock, FiFolder, FiGitBranch, FiLock, FiMonitor, FiSun } from "react-icons/fi";
 import WAKATIME_CONFIG from "../../config/wakatimeConfig";
+import { useLanguage } from "../../i18n/LanguageContext";
 import { fetchCodingNow } from "../../services/wakatimeService";
 import { formatAgo, formatDuration, formatTime } from "./format";
 import { languageColor } from "./languageColors";
@@ -68,32 +69,35 @@ function useNow() {
 export default function CodingNow({ showProject = true }) {
   const state = useCodingNow();
   const now = useNow();
+  const { t: texts } = useLanguage();
+  const t = texts.wakatime;
+  const locale = texts.locale;
 
   // Carregando, sem token ou erro: o cartão simplesmente não aparece
   if (state.status !== "ok") return null;
 
   const { active, last, todaySeconds } = state.data;
   const named = showProject && last?.isPublic;
-  const projectName = named ? last.project : "projeto privado";
+  const projectName = named ? last.project : t.privateProject;
 
   /* ---------- Parado: uma linha discreta ---------- */
   if (!active) {
     return (
-      <section className="waka-now idle" aria-label="Codando agora">
+      <section className="waka-now idle" aria-label={t.codingNow}>
         <span className="waka-now-status">
           <span className="waka-now-dot" aria-hidden="true" />
-          Parado agora
+          {t.idleNow}
         </span>
         <span className="waka-now-idle-text">
           {last ? (
             <>
-              Última atividade {formatAgo(last.at, now)} em <strong>{projectName}</strong>
+              {t.lastActivity} {formatAgo(last.at, now, t.ago)} {t.in} <strong>{projectName}</strong>
               {last.language && ` · ${last.language}`}
             </>
           ) : (
-            "Nenhuma atividade no editor hoje"
+            t.noActivityToday
           )}
-          {todaySeconds >= 60 && ` · ${formatDuration(todaySeconds)} hoje`}
+          {todaySeconds >= 60 && ` · ${t.todaySuffix(formatDuration(todaySeconds))}`}
         </span>
       </section>
     );
@@ -103,13 +107,13 @@ export default function CodingNow({ showProject = true }) {
   const sessionSeconds = (last.at - last.sessionStart) / 1000;
 
   return (
-    <section className="waka-now active" aria-label="Codando agora" aria-live="polite">
+    <section className="waka-now active" aria-label={t.codingNow} aria-live="polite">
       <div className="waka-now-head">
         <span className="waka-now-status">
           <span className="waka-now-dot" aria-hidden="true" />
-          Codando agora
+          {t.codingNow}
         </span>
-        <span className="waka-now-ago">último sinal {formatAgo(last.at, now)}</span>
+        <span className="waka-now-ago">{t.lastSignal(formatAgo(last.at, now, t.ago))}</span>
       </div>
 
       <p className="waka-now-project">
@@ -145,13 +149,13 @@ export default function CodingNow({ showProject = true }) {
         {sessionSeconds >= 60 && (
           <li>
             <FiClock aria-hidden="true" />
-            sessão de {formatDuration(sessionSeconds)} (desde {formatTime(last.sessionStart)})
+            {t.session(formatDuration(sessionSeconds), formatTime(last.sessionStart, locale))}
           </li>
         )}
         {last.projectTodaySeconds >= 60 && (
           <li>
             <FiSun aria-hidden="true" />
-            {formatDuration(last.projectTodaySeconds)} hoje neste projeto
+            {t.todayInProject(formatDuration(last.projectTodaySeconds))}
           </li>
         )}
       </ul>

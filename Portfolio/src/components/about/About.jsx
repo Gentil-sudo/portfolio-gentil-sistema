@@ -1,31 +1,15 @@
 import './about.css'
-import { useState } from 'react'
 import about from '../../data/about'
 import contacts from '../../data/contacts'
 import WakaTimeStats from '../wakaTimeStats/WakaTimeStats'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 function About () {
-    const [language, setLanguage] = useState('pt')
+    const { language } = useLanguage()
     const text = about[language]
 
     return (
-        <div className='about-box' lang={language === 'pt' ? 'pt-BR' : 'en'}>
-            <div className='about-language'>
-                <span>{text.switchLabel}:</span>
-                <button
-                    className={`about-language-btn ${language === 'pt' ? 'about-language-active' : ''}`}
-                    onClick={() => setLanguage('pt')}
-                >
-                    PT
-                </button>
-                <button
-                    className={`about-language-btn ${language === 'en' ? 'about-language-active' : ''}`}
-                    onClick={() => setLanguage('en')}
-                >
-                    EN
-                </button>
-            </div>
-
+        <div className='about-box'>
             <header className='about-header'>
                 <div className='about-avatar'>EG</div>
                 <div>

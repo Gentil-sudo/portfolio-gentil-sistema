@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiActivity, FiAward, FiClock, FiExternalLink, FiSun, FiCode } from "react-icons/fi";
 import WAKATIME_CONFIG from "../../config/wakatimeConfig";
+import { useLanguage } from "../../i18n/LanguageContext";
 import { fetchWakaTimeStats } from "../../services/wakatimeService";
 import CodingNow from "./CodingNow";
 import { formatDate, formatDuration, formatNumber, formatPercent } from "./format";
@@ -9,12 +10,17 @@ import "./WakaTimeStats.css";
 
 /**
  * Painel com as estatísticas do WakaTime (tempo programando, linguagens,
- * editores, sistemas, categorias e projetos) e o cartão "Codando agora"
- * (em que projeto você está mexendo no editor neste momento).
+ * editores, sistemas e projetos) e o cartão "Codando agora" (em que projeto
+ * você está mexendo no editor neste momento).
+ *
+ * Os textos vêm de src/i18n/translations.js (t.wakatime), no idioma escolhido
+ * no site. Ferramentas de IA (WAKATIME_CONFIG.HIDDEN_EDITORS) e as categorias
+ * já chegam filtradas do servidor (api/_wakatime.js).
  *
  * Para usar no seu projeto, copie:
  *   • a pasta components/WakaTimeStats
  *   • services/wakatimeService.js e config/wakatimeConfig.js
+ *   • a pasta i18n/ (ou troque useLanguage por textos fixos)
  *   • api/_wakatime.js, api/wakatime.js, api/_codando.js, api/codando.js
  *     e o plugin do vite.config.js
  *
@@ -23,22 +29,6 @@ import "./WakaTimeStats.css";
  * <WakaTimeStats showCodingNow={false} />
  */
 
-// Nomes que o WakaTime manda em inglês → português
-const CATEGORY_NAMES = {
-  Coding: "Programando",
-  "AI Coding": "Programando com IA",
-  "Writing Docs": "Escrevendo documentação",
-  "Writing Tests": "Escrevendo testes",
-  Debugging: "Depurando",
-  Building: "Compilando",
-  Browsing: "Navegando",
-  "Code Reviewing": "Revisando código",
-  Designing: "Design",
-  Meeting: "Reuniões",
-  Researching: "Pesquisando",
-  Learning: "Aprendendo",
-  Planning: "Planejando",
-};
 const OS_NAMES = { Mac: "macOS" };
 
 const { RANGES, DEFAULT_RANGE, PROFILE_URL, MAX_LANGUAGES, HIDDEN_LANGUAGES } =
@@ -84,7 +74,7 @@ function Kpi({ icon: Icon, label, value, note }) {
 }
 
 // Barra única dividida por linguagem (parte do todo)
-function LanguageStack({ languages }) {
+function LanguageStack({ languages, locale }) {
   return (
     <div className="waka-stack" aria-hidden="true">
       {languages.map((lang) => (
@@ -92,14 +82,14 @@ function LanguageStack({ languages }) {
           key={lang.name}
           className="waka-stack-seg"
           style={{ flexGrow: lang.seconds, background: lang.color }}
-          title={`${lang.name} · ${formatDuration(lang.seconds)} · ${formatPercent(lang.percent)}`}
+          title={`${lang.name} · ${formatDuration(lang.seconds)} · ${formatPercent(lang.percent, locale)}`}
         />
       ))}
     </div>
   );
 }
 
-function LanguageList({ languages, rest }) {
+function LanguageList({ languages, rest, t, locale }) {
   const max = languages[0]?.seconds || 1;
   return (
     <ul className="waka-list">
@@ -109,7 +99,7 @@ function LanguageList({ languages, rest }) {
             <span className="waka-dot" aria-hidden="true" />
             <span className="waka-name">{lang.name}</span>
             <span className="waka-time">{formatDuration(lang.seconds)}</span>
-            <span className="waka-pct">{formatPercent(lang.percent)}</span>
+            <span className="waka-pct">{formatPercent(lang.percent, locale)}</span>
           </div>
           <div className="waka-bar" aria-hidden="true">
             <span style={{ width: `${(lang.seconds / max) * 100}%` }} />
@@ -118,15 +108,15 @@ function LanguageList({ languages, rest }) {
       ))}
       {rest && (
         <li className="waka-row waka-row-rest">
-          + {rest.count} {rest.count === 1 ? "outra" : "outras"} ·{" "}
-          {formatDuration(rest.seconds)} · {formatPercent(rest.percent)}
+          + {rest.count} {t.others(rest.count)} ·{" "}
+          {formatDuration(rest.seconds)} · {formatPercent(rest.percent, locale)}
         </li>
       )}
     </ul>
   );
 }
 
-function MiniList({ title, items, rename = {} }) {
+function MiniList({ title, items, rename = {}, locale }) {
   if (!items?.length) return null;
   return (
     <section className="waka-mini">
@@ -138,7 +128,7 @@ function MiniList({ title, items, rename = {} }) {
             <span className="waka-mini-bar" aria-hidden="true">
               <span style={{ width: `${Math.max(item.percent, 2)}%` }} />
             </span>
-            <span className="waka-mini-pct">{formatPercent(item.percent)}</span>
+            <span className="waka-mini-pct">{formatPercent(item.percent, locale)}</span>
           </li>
         ))}
       </ul>
@@ -146,18 +136,13 @@ function MiniList({ title, items, rename = {} }) {
   );
 }
 
-function ErrorBox({ error }) {
-  const hint = {
-    missing_config:
-      "Crie o .env.local com o WAKATIME_ACCESS_TOKEN (npm run wakatime:oauth) e reinicie o npm run dev.",
-    invalid_token:
-      "Gere um token novo com npm run wakatime:oauth (ou configure o refresh token para a renovação automática).",
-    pending: "O WakaTime está calculando este período. Tente de novo em alguns segundos.",
-  }[error?.code];
+function ErrorBox({ error, t }) {
+  const message = t.errors[error?.code] ?? error?.message ?? t.loadError;
+  const hint = t.hints[error?.code];
 
   return (
     <div className={`waka-message ${error?.code === "pending" ? "warning" : "error"}`} role="alert">
-      <strong>{error?.message ?? "Não foi possível carregar o WakaTime."}</strong>
+      <strong>{message}</strong>
       {hint && <span>{hint}</span>}
     </div>
   );
@@ -189,6 +174,9 @@ export default function WakaTimeStats({
 }) {
   const [range, setRange] = useState(initialRange);
   const { status, data, error } = useWakaTime(range);
+  const { t: texts } = useLanguage();
+  const t = texts.wakatime;
+  const locale = texts.locale;
 
   const hidden = new Set(HIDDEN_LANGUAGES);
   const languages = (data?.languages ?? [])
@@ -214,16 +202,16 @@ export default function WakaTimeStats({
       {/* ---------- Período + link do perfil ---------- */}
       <div className="waka-toolbar">
         {showRangePicker && (
-          <div className="waka-ranges" role="group" aria-label="Período">
-            {RANGES.map((option) => (
+          <div className="waka-ranges" role="group" aria-label={t.period}>
+            {RANGES.map((value) => (
               <button
-                key={option.value}
+                key={value}
                 type="button"
-                className={option.value === range ? "active" : ""}
-                aria-pressed={option.value === range}
-                onClick={() => setRange(option.value)}
+                className={value === range ? "active" : ""}
+                aria-pressed={value === range}
+                onClick={() => setRange(value)}
               >
-                {option.label}
+                {t.ranges[value]}
               </button>
             ))}
           </div>
@@ -231,12 +219,12 @@ export default function WakaTimeStats({
 
         {PROFILE_URL && (
           <a className="waka-profile" href={PROFILE_URL} target="_blank" rel="noopener noreferrer">
-            Ver perfil no WakaTime <FiExternalLink aria-hidden="true" />
+            {t.profile} <FiExternalLink aria-hidden="true" />
           </a>
         )}
       </div>
 
-      {status === "error" && <ErrorBox error={error} />}
+      {status === "error" && <ErrorBox error={error} t={t} />}
       {status === "loading" && !data && <Skeleton />}
 
       {data && (
@@ -245,63 +233,67 @@ export default function WakaTimeStats({
           <ul className="waka-kpis">
             <Kpi
               icon={FiClock}
-              label="Tempo total"
+              label={t.totalTime}
               value={formatDuration(data.totalSeconds)}
               note={
                 data.range === "all_time" && data.start
-                  ? `desde ${formatDate(data.start)}`
-                  : `${formatNumber(languages.length)} linguagens`
+                  ? t.since(formatDate(data.start, locale))
+                  : t.languagesCount(languages.length)
               }
             />
             <Kpi
               icon={FiActivity}
-              label="Média diária"
+              label={t.dailyAverage}
               value={formatDuration(data.dailyAverage)}
-              note={data.activeDays != null ? `${formatNumber(data.activeDays)} dias ativos` : null}
+              note={data.activeDays != null ? t.activeDays(formatNumber(data.activeDays, locale)) : null}
             />
             {data.today ? (
-              <Kpi icon={FiSun} label="Hoje" value={formatDuration(data.today.seconds)} note="até agora" />
+              <Kpi icon={FiSun} label={t.today} value={formatDuration(data.today.seconds)} note={t.soFar} />
             ) : (
               <Kpi
                 icon={FiCode}
-                label="Editor principal"
+                label={t.topEditor}
                 value={topEditor?.name ?? "—"}
-                note={topEditor ? `${formatPercent(topEditor.percent)} do tempo` : null}
+                note={topEditor ? t.ofTime(formatPercent(topEditor.percent, locale)) : null}
               />
             )}
             <Kpi
               icon={FiAward}
-              label="Melhor dia"
+              label={t.bestDay}
               value={data.bestDay ? formatDuration(data.bestDay.seconds) : "—"}
-              note={data.bestDay ? formatDate(data.bestDay.date) : "sem dados no período"}
+              note={data.bestDay ? formatDate(data.bestDay.date, locale) : t.noData}
             />
           </ul>
 
           {/* ---------- Linguagens ---------- */}
           {languages.length > 0 ? (
             <>
-              <LanguageStack languages={languages} />
+              <LanguageStack languages={languages} locale={locale} />
               <div className="waka-grid">
                 <section className="waka-card">
-                  <h3>Linguagens</h3>
-                  <LanguageList languages={top} rest={rest} />
+                  <h3>{t.languages}</h3>
+                  <LanguageList languages={top} rest={rest} t={t} locale={locale} />
                 </section>
 
                 <aside className="waka-card waka-side">
-                  <MiniList title="Editores" items={data.editors} />
-                  <MiniList title="Sistemas operacionais" items={data.operatingSystems} rename={OS_NAMES} />
-                  <MiniList title="Categorias" items={data.categories} rename={CATEGORY_NAMES} />
+                  <MiniList title={t.editors} items={data.editors} locale={locale} />
+                  <MiniList
+                    title={t.operatingSystems}
+                    items={data.operatingSystems}
+                    rename={OS_NAMES}
+                    locale={locale}
+                  />
                 </aside>
               </div>
             </>
           ) : (
-            <p className="waka-empty">Nenhuma atividade registrada neste período.</p>
+            <p className="waka-empty">{t.empty}</p>
           )}
 
           {/* ---------- Projetos ---------- */}
           {showProjects && data.projects?.length > 0 && (
             <section className="waka-card waka-projects">
-              <h3>Projetos</h3>
+              <h3>{t.projects}</h3>
               <ul>
                 {data.projects.map((project) => (
                   <li key={project.name}>
@@ -314,8 +306,7 @@ export default function WakaTimeStats({
           )}
 
           <p className="waka-source">
-            Dados do WakaTime ·{" "}
-            {data.mode === "oauth" ? "lidos com o seu token OAuth" : "perfil público"}
+            {t.source} · {data.mode === "oauth" ? t.sourceOauth : t.sourcePublic}
           </p>
         </div>
       )}

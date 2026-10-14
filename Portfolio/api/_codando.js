@@ -32,6 +32,7 @@
 
 import WAKATIME_CONFIG from "../src/config/wakatimeConfig.js";
 import { fetchWakaTime, hasAccessToken } from "./_oauth.js";
+import { isHiddenEditor } from "./_wakatime.js";
 
 const { CODING_NOW } = WAKATIME_CONFIG;
 export const CODANDO_PATH = CODING_NOW.API_PATH;
@@ -81,11 +82,14 @@ const EDITOR_NAMES = {
   jupyter: "Jupyter",
 };
 
+// Ferramentas de IA (WAKATIME_CONFIG.HIDDEN_EDITORS) viram null: o cartão
+// fica sem o nome do editor
 function editorName(editor) {
-  if (!editor) return null;
+  if (!editor || isHiddenEditor(editor)) return null;
   const text = String(editor);
   const key = text.toLowerCase().replace(/[\s_-]/g, "");
-  return EDITOR_NAMES[key] ?? text.charAt(0).toUpperCase() + text.slice(1);
+  const name = EDITOR_NAMES[key] ?? text.charAt(0).toUpperCase() + text.slice(1);
+  return isHiddenEditor(name) ? null : name;
 }
 
 // "2026-10-09" no fuso da conta do WakaTime

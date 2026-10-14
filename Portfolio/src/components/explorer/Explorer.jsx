@@ -1,11 +1,14 @@
 import './explorer.css'
 import { useEffect, useRef, useState } from 'react'
 import { VscChromeMinimize, VscChromeMaximize, VscChromeRestore, VscChromeClose } from "react-icons/vsc";
+import { useLanguage } from '../../i18n/LanguageContext'
 
 function Explorer({ app, hidden, onClose, onMinimize, children }) {
     const [maximized, setMaximized] = useState(false)
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const dragStart = useRef(null)
+    const { t } = useLanguage()
+    const title = t.apps[app.id]
 
     const Icon = app.icon
 
@@ -49,7 +52,7 @@ function Explorer({ app, hidden, onClose, onMinimize, children }) {
             className={`explorer-window ${maximized ? 'explorer-maximized' : ''} ${hidden ? 'explorer-hidden' : ''}`}
             style={style}
             role='dialog'
-            aria-label={app.title}
+            aria-label={title}
         >
             <header
                 className='explorer-titleBar'
@@ -60,25 +63,25 @@ function Explorer({ app, hidden, onClose, onMinimize, children }) {
             >
                 <div className='explorer-title'>
                     <Icon />
-                    <span>{app.title}</span>
+                    <span>{title}</span>
                 </div>
                 <div className='explorer-controls'>
-                    <button className='explorer-control-btn' title='Minimizar' onClick={onMinimize}>
+                    <button className='explorer-control-btn' title={t.explorer.minimize} onClick={onMinimize}>
                         <VscChromeMinimize />
                     </button>
-                    <button className='explorer-control-btn' title={maximized ? 'Restaurar' : 'Maximizar'} onClick={() => setMaximized(!maximized)}>
+                    <button className='explorer-control-btn' title={maximized ? t.explorer.restore : t.explorer.maximize} onClick={() => setMaximized(!maximized)}>
                         {maximized ? <VscChromeRestore /> : <VscChromeMaximize />}
                     </button>
-                    <button className='explorer-control-btn explorer-close-btn' title='Fechar' onClick={onClose}>
+                    <button className='explorer-control-btn explorer-close-btn' title={t.explorer.close} onClick={onClose}>
                         <VscChromeClose />
                     </button>
                 </div>
             </header>
 
             <div className='explorer-pathBar'>
-                <span>Este Computador</span>
+                <span>{t.explorer.thisPc}</span>
                 <span className='explorer-path-separator'>›</span>
-                <span>{app.title}</span>
+                <span>{title}</span>
             </div>
 
             <section className='explorer-content'>

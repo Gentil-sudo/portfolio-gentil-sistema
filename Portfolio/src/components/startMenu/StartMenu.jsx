@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import { MdLockOutline, MdOutlinePowerSettingsNew, MdRestartAlt } from "react-icons/md";
 import Logo from '../../assets/imgs/logo.png'
 import Profile from '../../assets/imgs/profile.webp'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 function StartMenu({ apps, onOpen, onLock, onRestart }) {
     const [open, setOpen] = useState(false)
     const [powerOpen, setPowerOpen] = useState(false)
     const menuRef = useRef(null)
+    const { t } = useLanguage()
 
     function closeMenu() {
         setOpen(false)
@@ -39,8 +41,8 @@ function StartMenu({ apps, onOpen, onLock, onRestart }) {
         <div className='startMenu' ref={menuRef}>
             <button
                 className='taskBar-btn-Home'
-                title='Iniciar'
-                aria-label='Iniciar'
+                title={t.startMenu.start}
+                aria-label={t.startMenu.start}
                 aria-expanded={open}
                 aria-haspopup='menu'
                 onClick={() => (open ? closeMenu() : setOpen(true))}
@@ -49,13 +51,13 @@ function StartMenu({ apps, onOpen, onLock, onRestart }) {
             </button>
 
             {open && (
-                <div className='startMenu-panel' role='menu' aria-label='Menu Iniciar'>
-                    <p className='startMenu-section'>Aplicativos</p>
+                <div className='startMenu-panel' role='menu' aria-label={t.startMenu.menu}>
+                    <p className='startMenu-section'>{t.startMenu.apps}</p>
                     <div className='startMenu-apps'>
-                        {apps.map(({ id, title, icon: Icon }) => (
+                        {apps.map(({ id, icon: Icon }) => (
                             <button key={id} className='startMenu-app' role='menuitem' onClick={() => run(() => onOpen(id))}>
                                 <Icon />
-                                <span>{title}</span>
+                                <span>{t.apps[id]}</span>
                             </button>
                         ))}
                     </div>
@@ -68,19 +70,19 @@ function StartMenu({ apps, onOpen, onLock, onRestart }) {
 
                         <div className='startMenu-power'>
                             {powerOpen && (
-                                <div className='startMenu-powerOptions' role='menu' aria-label='Opções de energia'>
+                                <div className='startMenu-powerOptions' role='menu' aria-label={t.startMenu.powerOptions}>
                                     <button role='menuitem' onClick={() => run(onLock)}>
-                                        <MdLockOutline /> Bloquear
+                                        <MdLockOutline /> {t.startMenu.lock}
                                     </button>
                                     <button role='menuitem' onClick={() => run(onRestart)}>
-                                        <MdRestartAlt /> Reiniciar
+                                        <MdRestartAlt /> {t.startMenu.restart}
                                     </button>
                                 </div>
                             )}
                             <button
                                 className='startMenu-powerBtn'
-                                title='Energia'
-                                aria-label='Energia'
+                                title={t.startMenu.power}
+                                aria-label={t.startMenu.power}
                                 aria-expanded={powerOpen}
                                 onClick={() => setPowerOpen(!powerOpen)}
                             >

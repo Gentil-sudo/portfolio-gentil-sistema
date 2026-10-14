@@ -5,34 +5,6 @@
     color: var(--text);
 }
 
-.about-language {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.about-language-btn {
-    padding: 4px 12px;
-    font-size: 13px;
-    font-weight: bold;
-    background: transparent;
-    border: 1px solid var(--accent-2);
-    border-radius: 999px;
-    color: var(--accent-2);
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.about-language-btn:hover,
-.about-language-active {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-}
-
 .about-header {
     display: flex;
     align-items: center;

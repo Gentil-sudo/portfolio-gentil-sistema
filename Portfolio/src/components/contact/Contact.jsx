@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import contacts from '../../data/contacts'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 const MY_EMAIL = 'enzogentil.profissional@gmail.com'
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
@@ -32,6 +33,8 @@ function ContactLinks() {
 function Contact() {
     const [form, setForm] = useState(emptyForm)
     const [status, setStatus] = useState('idle')
+    const { t } = useLanguage()
+    const text = t.contact
 
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -50,6 +53,7 @@ function Contact() {
                     from_name: 'Portfólio',
                     botcheck: event.target.botcheck.checked,
                     ...form,
+                    // O e-mail chega para mim: o assunto padrão fica em português
                     subject: form.subject || `Nova mensagem de ${form.name}`,
                 }),
             })
@@ -69,7 +73,7 @@ function Contact() {
                 <ContactLinks />
                 <div className='contact-box contact-fallback'>
                     <MdOutlineEmail />
-                    <p>Me mande um e-mail:</p>
+                    <p>{text.emailMe}</p>
                     <a href={`mailto:${MY_EMAIL}`}>{MY_EMAIL}</a>
                 </div>
             </div>
@@ -81,23 +85,23 @@ function Contact() {
             <ContactLinks />
             <form className='contact-box' onSubmit={handleSubmit}>
                 <header className='contact-header'>
-                    <h2>Nova mensagem</h2>
+                    <h2>{text.newMessage}</h2>
                 </header>
 
                 <div className='contact-field'>
-                    <span className='contact-label'>Para</span>
+                    <span className='contact-label'>{text.to}</span>
                     <span className='contact-to'>Enzo Gentil &lt;{MY_EMAIL}&gt;</span>
                 </div>
                 <label className='contact-field'>
-                    <span className='contact-label'>Nome</span>
+                    <span className='contact-label'>{text.name}</span>
                     <input name='name' value={form.name} onChange={handleChange} required autoComplete='name' />
                 </label>
                 <label className='contact-field'>
-                    <span className='contact-label'>De</span>
-                    <input type='email' name='email' value={form.email} onChange={handleChange} required autoComplete='email' placeholder='seu@email.com' />
+                    <span className='contact-label'>{text.from}</span>
+                    <input type='email' name='email' value={form.email} onChange={handleChange} required autoComplete='email' placeholder={text.emailPlaceholder} />
                 </label>
                 <label className='contact-field'>
-                    <span className='contact-label'>Assunto</span>
+                    <span className='contact-label'>{text.subject}</span>
                     <input name='subject' value={form.subject} onChange={handleChange} />
                 </label>
 
@@ -107,20 +111,20 @@ function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     required
-                    placeholder='Escreva sua mensagem...'
-                    aria-label='Mensagem'
+                    placeholder={text.messagePlaceholder}
+                    aria-label={text.message}
                 />
 
                 <input type='checkbox' name='botcheck' className='contact-botcheck' tabIndex={-1} autoComplete='off' />
 
                 <footer className='contact-footer'>
                     <button type='submit' className='contact-send' disabled={status === 'sending'}>
-                        <IoSend /> {status === 'sending' ? 'Enviando...' : 'Enviar'}
+                        <IoSend /> {status === 'sending' ? text.sending : text.send}
                     </button>
                     <p className='contact-status' role='status'>
-                        {status === 'sent' && 'Mensagem enviada! Respondo assim que puder.'}
+                        {status === 'sent' && text.sent}
                         {status === 'error' && (
-                            <>Não foi possível enviar. Tente pelo <a href={`mailto:${MY_EMAIL}`}>e-mail</a>.</>
+                            <>{text.errorBefore}<a href={`mailto:${MY_EMAIL}`}>{text.errorLink}</a>{text.errorAfter}</>
                         )}
                     </p>
                 </footer>

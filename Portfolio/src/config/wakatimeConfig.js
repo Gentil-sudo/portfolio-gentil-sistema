@@ -11,13 +11,24 @@ const WAKATIME_CONFIG = {
   // Período aberto ao carregar a página
   DEFAULT_RANGE: "last_7_days",
 
-  // Botões de período (value = range aceito pela API do WakaTime)
-  RANGES: [
-    { value: "last_7_days", label: "7 dias" },
-    { value: "last_30_days", label: "30 dias" },
-    { value: "last_6_months", label: "6 meses" },
-    { value: "last_year", label: "1 ano" },
-    { value: "all_time", label: "Desde sempre" },
+  // Botões de período (ranges aceitos pela API do WakaTime).
+  // Os rótulos, em português e inglês, ficam em src/i18n/translations.js
+  RANGES: ["last_7_days", "last_30_days", "last_6_months", "last_year", "all_time"],
+
+  // Ferramentas de IA que não aparecem no painel: o servidor tira esses nomes
+  // da lista de editores (e do "Codando agora") antes de mandar ao navegador.
+  // A comparação ignora maiúsculas, espaços, "-" e "_".
+  HIDDEN_EDITORS: [
+    "Claude Code",
+    "Claude",
+    "Codex",
+    "Copilot",
+    "Gemini CLI",
+    "Aider",
+    "Cline",
+    "Roo Code",
+    "Kilo Code",
+    "Amp",
   ],
 
   // Link do seu perfil público (opcional: deixe "" para esconder o botão)

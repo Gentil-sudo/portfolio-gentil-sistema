@@ -10,6 +10,7 @@ import Boot from './components/boot/Boot'
 import Login from './components/login/Login'
 import apps from './data/apps'
 import useTheme from './hooks/useTheme'
+import { useLanguage } from './i18n/LanguageContext'
 
 const SESSION_KEY = 'portfolio-signed-in'
 
@@ -31,6 +32,7 @@ function App() {
     const [openAppId, setOpenAppId] = useState(null)
     const [minimized, setMinimized] = useState(false)
     const { theme, toggleTheme } = useTheme()
+    const { t } = useLanguage()
     const [stage, setStage] = useState(getInitialStage)
 
     const handleBootDone = useCallback(() => setStage('login'), [])
@@ -88,7 +90,7 @@ function App() {
                         onClose={handleClose}
                         onMinimize={() => setMinimized(true)}
                     >
-                        {content ?? <p className='explorer-placeholder'>Em construção...</p>}
+                        {content ?? <p className='explorer-placeholder'>{t.explorer.placeholder}</p>}
                     </Explorer>
                 )}
             </main>
