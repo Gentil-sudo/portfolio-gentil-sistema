@@ -1,16 +1,16 @@
 
 import './taskBar.css'
 import ThemeButton from '../themeButton/ThemeButton'
-import Logo from "../../assets/imgs/logo.png"
+import StartMenu from "../startMenu/StartMenu"
 
-function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme }) {
+function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, onLock, onRestart, onShowDesktop }) {
 
     return (
         <>
             <nav className="taskBar-box">
                 <div className='taskBar-elements'>
                     <div className='taskBar-element-Home'>
-                        <button className='taskBar-btn-Home'><img src={Logo} alt="Logo" className='home-img' /></button>
+                        <StartMenu apps={apps} onOpen={onLaunch} onLock={onLock} onRestart={onRestart} />
                     </div>
                     <div className='taskBar-apps'>
                         <div className='taskBar-btns-box'>
@@ -31,7 +31,7 @@ function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme }) {
                     </div>
                   
                     <div className='taskBar-btn-back-box'>
-                        <button className='taskBar-btn-back'>|</button>
+                        <button className='taskBar-btn-back' title='Mostrar área de trabalho' aria-label='Mostrar área de trabalho' onClick={onShowDesktop}>|</button>
                     </div>
                 </div>
             </nav>

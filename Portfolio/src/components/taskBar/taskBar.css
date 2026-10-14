@@ -1,6 +1,7 @@
 .taskBar-box {
   position: fixed;
   bottom: 0;
+  z-index: 20;
   display: flex;
   width: 100vw;
   height: 10vh;

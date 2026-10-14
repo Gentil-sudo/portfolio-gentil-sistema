@@ -41,6 +41,19 @@ function App() {
         } catch {}
     }, [])
 
+    function handleLock() {
+        setStage('login')
+        try {
+            sessionStorage.removeItem(SESSION_KEY)
+        } catch {}
+    }
+
+    function handleRestart() {
+        handleClose()
+        handleLock()
+        setStage('boot')
+    }
+
     const openApp = apps.find((app) => app.id === openAppId)
     const content = openApp && appContents[openApp.id]
 
@@ -49,6 +62,11 @@ function App() {
             setMinimized(true)
             return
         }
+        setOpenAppId(id)
+        setMinimized(false)
+    }
+
+    function handleLaunch(id) {
         setOpenAppId(id)
         setMinimized(false)
     }
@@ -80,6 +98,10 @@ function App() {
                 onOpen={handleOpen}
                 theme={theme}
                 onToggleTheme={toggleTheme}
+                onLaunch={handleLaunch}
+                onLock={handleLock}
+                onRestart={handleRestart}
+                onShowDesktop={() => setMinimized(true)}
             />
             {stage !== 'desktop' && <Login onDone={handleLoginDone} />}
             {stage === 'boot' && <Boot onDone={handleBootDone} />}
