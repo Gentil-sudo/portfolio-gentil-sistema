@@ -4,7 +4,7 @@ Meu portfólio pessoal em formato de **sistema operacional**: o site liga com um
 
 🔗 **Acesse:** [portfolio-gentil-sistema.vercel.app](https://portfolio-gentil-sistema.vercel.app)
 
-Sou estudante de Engenharia de Software na PUC Minas e trabalho com desenvolvimento web. Aqui ficam meus projetos, minhas experiências, as linguagens que mais uso (direto do WakaTime) e um formulário de contato.
+Sou estudante de Engenharia de Software na PUC Minas. Aqui ficam meus projetos, minhas experiências, as linguagens que mais uso (direto do WakaTime) e um formulário de contato.
 
 ## Funcionalidades
 
