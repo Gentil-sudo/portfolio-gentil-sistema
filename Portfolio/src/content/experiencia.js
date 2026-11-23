@@ -15,10 +15,9 @@ const experiencia = [
         type: 'Hackathon',
         period: '2026',
         status: 'concluido',
-        // Tirado do README do repositório do time: confirmar com o Enzo
         description: {
-            pt: 'No desafio Junior Astronaut Mission Trainer, o time criou o Aurora Station: um jogo para crianças de 7 a 12 anos em que o jogador comanda uma estação espacial em órbita de Marte e aprende fatos reais da NASA. Feito com React, TypeScript e Phaser.',
-            en: 'For the Junior Astronaut Mission Trainer challenge, the team built Aurora Station: a game for kids aged 7 to 12 in which the player commands a space station orbiting Mars and learns real NASA facts. Built with React, TypeScript and Phaser.',
+            pt: 'No desafio Junior Astronaut Mission Trainer, o time criou o Aurora Station: um jogo para crianças de 7 a 12 anos em que o jogador comanda uma estação espacial em órbita de Marte e aprende fatos reais da NASA. Desenvolvi as missões, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e fiz cerca de 80% da acessibilidade.',
+            en: 'For the Junior Astronaut Mission Trainer challenge, the team built Aurora Station: a game for kids aged 7 to 12 in which the player commands a space station orbiting Mars and learns real NASA facts. I built the missions, researched the critical topics of life on Mars (water, energy and how the station works) and did about 80% of the accessibility work.',
         },
         link: {
             href: 'https://hackathon-nasa-aurora.vercel.app',

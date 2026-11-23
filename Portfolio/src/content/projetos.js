@@ -83,6 +83,31 @@ const projetos = [
             en: 'I handled the back end, the deployment and the health map and events features.',
         },
     },
+    {
+        id: 'aurora-station',
+        name: 'Aurora Station',
+        owner: 'gabiscamp', // repositório oficial do time
+        repo: 'hackathon_nasa_aurora',
+        date: '2026-11', // criação do repositório oficial
+        featured: true,
+        featuredOrder: 4,
+        context: 'equipe',
+        team: 4,
+        description: {
+            pt: 'Jogo do NASA Space Apps Challenge 2026 para crianças de 7 a 12 anos: o jogador comanda uma estação espacial em órbita de Marte por 45 dias, resolve emergências e aprende fatos reais da NASA.',
+            en: 'NASA Space Apps Challenge 2026 game for kids aged 7 to 12: the player commands a space station orbiting Mars for 45 days, handles emergencies and learns real NASA facts.',
+        },
+        stack: ['React', 'TypeScript', 'Phaser 3', 'Zustand', 'Vite', 'Tailwind CSS', 'Web Speech API'],
+        demo: 'https://hackathon-nasa-aurora.vercel.app',
+        whatIDid: {
+            pt: 'Desenvolvi as missões, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e fiz cerca de 80% da acessibilidade do jogo.',
+            en: "I built the missions, researched the critical topics of life on Mars (water, energy and how the station works) and did about 80% of the game's accessibility work.",
+        },
+        technicalHighlight: {
+            pt: 'Acessibilidade desde o início: todas as telas verificadas com axe-core (WCAG 2.2 AA) sem nenhum problema encontrado, e leitura em voz alta pela Web Speech API do navegador.',
+            en: 'Accessibility from day one: every screen checked with axe-core (WCAG 2.2 AA) with no issues found, plus read-aloud through the browser Web Speech API.',
+        },
+    },
 
     /* ---------------- Demais projetos ---------------- */
     {
