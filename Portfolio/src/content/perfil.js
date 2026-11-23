@@ -43,10 +43,10 @@ const perfil = {
         en: 'Portuguese (native) · English (intermediate)',
     },
 
-    // PDF em public/. Ainda não há versão em inglês: os dois idiomas baixam o mesmo arquivo
+    // PDFs em public/, um por idioma
     resume: {
         pt: '/enzo-gentil-curriculo-pt.pdf',
-        en: '/enzo-gentil-curriculo-pt.pdf',
+        en: '/enzo-gentil-curriculo-en.pdf',
     },
 
     contacts: [
