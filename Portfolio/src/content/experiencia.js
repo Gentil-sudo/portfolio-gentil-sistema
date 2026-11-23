@@ -13,11 +13,11 @@ const experiencia = [
             en: 'Participant — team AuroraPucMinas (4 people)',
         },
         type: 'Hackathon',
-        period: '2026',
+        period: { pt: 'nov. 2026', en: 'Nov 2026' },
         status: 'concluido',
         description: {
-            pt: 'No desafio Junior Astronaut Mission Trainer, o time criou o Aurora Station: um jogo para crianças de 7 a 12 anos em que o jogador comanda uma estação espacial em órbita de Marte e aprende fatos reais da NASA. Desenvolvi as missões, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e fiz cerca de 80% da acessibilidade.',
-            en: 'For the Junior Astronaut Mission Trainer challenge, the team built Aurora Station: a game for kids aged 7 to 12 in which the player commands a space station orbiting Mars and learns real NASA facts. I built the missions, researched the critical topics of life on Mars (water, energy and how the station works) and did about 80% of the accessibility work.',
+            pt: 'No desafio Junior Astronaut Mission Trainer, o time criou o Aurora Station: um jogo para crianças de 7 a 12 anos em que o jogador comanda uma estação espacial em órbita de Marte e aprende fatos reais da NASA. Desenvolvi o sistema de missões e a página inicial, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e cuidei do design e de cerca de 80% da acessibilidade.',
+            en: 'For the Junior Astronaut Mission Trainer challenge, the team built Aurora Station: a game for kids aged 7 to 12 in which the player commands a space station orbiting Mars and learns real NASA facts. I built the mission system and the home screen, researched the critical topics of life on Mars (water, energy and how the station works) and handled the design and about 80% of the accessibility work.',
         },
         link: {
             href: 'https://hackathon-nasa-aurora.vercel.app',
@@ -32,8 +32,8 @@ const experiencia = [
             en: 'Back end and deployment — team of 6',
         },
         type: { pt: 'Projeto em equipe', en: 'Team project' },
-        period: null, // PENDENTE
-        status: null, // PENDENTE
+        period: { pt: 'ago. 2026 – dez. 2026', en: 'Aug 2026 – Dec 2026' },
+        status: 'atual',
         description: {
             pt: 'Desenvolvimento em equipe com Scrum: sprints e quadro Kanban, com React, Spring Boot e MongoDB Atlas. Fiquei com o back-end, o deploy e as funcionalidades de mapa da saúde e de eventos.',
             en: 'Team development with Scrum: sprints and a Kanban board, using React, Spring Boot and MongoDB Atlas. I handled the back end, the deployment and the health map and events features.',

@@ -66,7 +66,8 @@ const projetos = [
     {
         id: 'mais-saude',
         name: '+Saúde',
-        date: null, // PENDENTE
+        date: '2026-08', // início (ago. – dez. 2026)
+        inProgress: true,
         featured: true,
         featuredOrder: 3,
         context: 'equipe',
@@ -100,8 +101,8 @@ const projetos = [
         stack: ['React', 'TypeScript', 'Phaser 3', 'Zustand', 'Vite', 'Tailwind CSS', 'Web Speech API'],
         demo: 'https://hackathon-nasa-aurora.vercel.app',
         whatIDid: {
-            pt: 'Desenvolvi as missões, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e fiz cerca de 80% da acessibilidade do jogo.',
-            en: "I built the missions, researched the critical topics of life on Mars (water, energy and how the station works) and did about 80% of the game's accessibility work.",
+            pt: 'Desenvolvi o sistema de missões e a página inicial, pesquisei os temas críticos da vida em Marte (água, energia e o funcionamento da estação) e cuidei do design e de cerca de 80% da acessibilidade do jogo.',
+            en: "I built the mission system and the home screen, researched the critical topics of life on Mars (water, energy and how the station works) and handled the design and about 80% of the game's accessibility work.",
         },
         technicalHighlight: {
             pt: 'Acessibilidade desde o início: todas as telas verificadas com axe-core (WCAG 2.2 AA) sem nenhum problema encontrado, e leitura em voz alta pela Web Speech API do navegador.',

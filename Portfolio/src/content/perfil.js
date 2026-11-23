@@ -29,14 +29,25 @@ const perfil = {
         en: 'Software Engineering student at PUC Minas (ranked 1st in ProUni), focused on web development with React, Next.js, Node.js and Java.',
     },
     location: 'Belo Horizonte',
-    // PENDENTE: modalidades aceitas (presencial, híbrido, remoto)
     objective: {
-        pt: 'Primeiro estágio em desenvolvimento, em Belo Horizonte',
-        en: 'First internship as a developer, in Belo Horizonte',
+        pt: 'Primeiro estágio em desenvolvimento, em Belo Horizonte: presencial, híbrido ou remoto',
+        en: 'First internship as a developer, in Belo Horizonte: on-site, hybrid or remote',
+    },
+    // Estudo à noite
+    availability: {
+        pt: 'Disponível nos turnos da manhã e da tarde',
+        en: 'Available mornings and afternoons',
+    },
+    languages: {
+        pt: 'Português nativo · Inglês intermediário',
+        en: 'Portuguese (native) · English (intermediate)',
     },
 
-    // PENDENTE: caminho do PDF do currículo (ex.: '/curriculo-enzo-gentil.pdf' em public/)
-    resume: null,
+    // PDF em public/. Ainda não há versão em inglês: os dois idiomas baixam o mesmo arquivo
+    resume: {
+        pt: '/enzo-gentil-curriculo-pt.pdf',
+        en: '/enzo-gentil-curriculo-pt.pdf',
+    },
 
     contacts: [
         { id: 'email', label: 'E-mail', href: `mailto:${EMAIL}`, icon: MdOutlineEmail },
