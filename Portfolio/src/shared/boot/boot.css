@@ -8,7 +8,7 @@
     justify-content: center;
     gap: 64px;
     background-color: #000;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .boot-leaving {
@@ -60,8 +60,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .boot {
+        transition: none;
+    }
+
     .boot-logo,
     .boot-spinner span {
         animation: none;
+    }
+
+    /* Sem a órbita, os pontos ficariam empilhados: mostra um só, parado */
+    .boot-spinner span:not(:first-child) {
+        display: none;
     }
 }

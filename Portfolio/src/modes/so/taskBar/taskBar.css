@@ -87,10 +87,43 @@
     cursor: pointer;
 }
 
+.taskBar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Botão principal: Modo recrutador (rosa como cor de destaque) */
+.taskBar-mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+    background-color: var(--accent-strong);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.taskBar-mode-btn svg {
+    font-size: 22px;
+}
+
+.taskBar-mode-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
 .taskBar-btn-back-box {
     display: flex;
     justify-content: flex-end;
-    width: 70px;
 }
 
 .taskBar-btn-back {
@@ -164,5 +197,38 @@
 
     .taskBar-btn-back-box {
         display: none;
+    }
+
+    /* Sem espaço para o texto: fica só o ícone (o nome segue no aria-label) */
+    .taskBar-mode-btn {
+        width: 44px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .taskBar-mode-label {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .taskBar-btn-extra {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .taskBar-btn-Home,
+    .taskBar-btn,
+    .taskBar-btn-back,
+    .taskBar-mode-btn {
+        transition: none;
+    }
+
+    .taskBar-btn-Home:hover,
+    .taskBar-btn:hover,
+    .taskBar-btn-back:hover,
+    .taskBar-mode-btn:hover {
+        transform: none;
     }
 }

@@ -16,6 +16,13 @@
   --border-soft: rgba(168, 85, 176, 0.3);
   --accent: #e0449e;
   --accent-2: #a855b0;
+  /* Telas fora do SO (escolha de modo): fundo e cartões opacos */
+  --page-bg: #0f0a1c;
+  --card-bg: #1a1230;
+  --card-border: rgba(168, 85, 176, 0.35);
+  /* Fundo de botão com texto branco (contraste ≥ 4,5:1) */
+  --accent-strong: #c42a85;
+  --focus: #f0a6d6;
   color-scheme: dark;
 }
 
@@ -30,7 +37,22 @@
   --border-soft: rgba(106, 76, 147, 0.3);
   --accent: #c42a85;
   --accent-2: #8a3d93;
+  --page-bg: #f6f1fb;
+  --card-bg: #ffffff;
+  --card-border: rgba(106, 76, 147, 0.28);
+  --accent-strong: #c42a85;
+  --focus: #8a3d93;
   color-scheme: light;
+}
+
+body {
+  background-color: var(--page-bg);
+}
+
+/* Foco visível para quem navega pelo teclado */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .main {

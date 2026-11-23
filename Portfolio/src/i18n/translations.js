@@ -22,11 +22,30 @@ const translations = {
         theme: { light: 'Modo claro', dark: 'Modo escuro' },
 
         boot: { loading: 'Carregando' },
-        login: {
-            hint: 'Clique ou pressione qualquer tecla para entrar',
+        choice: {
             photo: (name) => `Foto de ${name}`,
-            enter: 'Entrar',
-            welcome: 'Bem-vindo',
+            question: 'Como você quer ver o portfólio?',
+            recruiter: {
+                title: 'Modo recrutador',
+                description: 'Resumo em uma página: projetos, experiência, currículo e contato.',
+                cta: 'Ver o resumo',
+                badge: 'Mais rápido',
+            },
+            os: {
+                title: 'Explorar o portfólio',
+                description: 'A experiência interativa em formato de sistema operacional.',
+                cta: 'Abrir a área de trabalho',
+            },
+            remember: 'Lembrar minha escolha',
+        },
+        modeSwitch: {
+            toRecruiter: 'Modo recrutador',
+            toRecruiterHint: 'Ver o resumo em uma página',
+            toOs: 'Explorar modo SO',
+        },
+        recruiter: {
+            resume: 'Currículo',
+            soon: 'A versão completa desta página está em construção.',
         },
         startMenu: {
             start: 'Iniciar',
@@ -34,8 +53,7 @@ const translations = {
             apps: 'Aplicativos',
             power: 'Energia',
             powerOptions: 'Opções de energia',
-            lock: 'Bloquear',
-            restart: 'Reiniciar',
+            exit: 'Sair para a tela de escolha',
         },
         taskBar: { showDesktop: 'Mostrar área de trabalho' },
         explorer: {
@@ -173,11 +191,30 @@ const translations = {
         theme: { light: 'Light mode', dark: 'Dark mode' },
 
         boot: { loading: 'Loading' },
-        login: {
-            hint: 'Click or press any key to sign in',
+        choice: {
             photo: (name) => `Photo of ${name}`,
-            enter: 'Sign in',
-            welcome: 'Welcome',
+            question: 'How would you like to see the portfolio?',
+            recruiter: {
+                title: 'Recruiter mode',
+                description: 'A one-page summary: projects, experience, résumé and contact.',
+                cta: 'See the summary',
+                badge: 'Fastest',
+            },
+            os: {
+                title: 'Explore the portfolio',
+                description: 'The interactive experience, styled as an operating system.',
+                cta: 'Open the desktop',
+            },
+            remember: 'Remember my choice',
+        },
+        modeSwitch: {
+            toRecruiter: 'Recruiter mode',
+            toRecruiterHint: 'See the one-page summary',
+            toOs: 'Explore OS mode',
+        },
+        recruiter: {
+            resume: 'Résumé',
+            soon: 'The full version of this page is under construction.',
         },
         startMenu: {
             start: 'Start',
@@ -185,8 +222,7 @@ const translations = {
             apps: 'Apps',
             power: 'Power',
             powerOptions: 'Power options',
-            lock: 'Lock',
-            restart: 'Restart',
+            exit: 'Back to the mode choice',
         },
         taskBar: { showDesktop: 'Show desktop' },
         explorer: {

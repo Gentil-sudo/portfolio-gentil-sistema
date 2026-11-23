@@ -1,0 +1,67 @@
+/* Provisório: o visual editorial (artboard "C") entra na Fase 3 */
+.recruiter {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    background-color: var(--page-bg);
+}
+
+.recruiter-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.recruiter-logo {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.recruiter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.recruiter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 40px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--accent-strong);
+    border: 1px solid var(--accent-strong);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.recruiter-btn-ghost {
+    color: var(--text);
+    background-color: transparent;
+    border-color: var(--card-border);
+}
+
+.recruiter-main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    line-height: 1.5;
+}
+
+.recruiter-soon {
+    color: var(--text-muted);
+}

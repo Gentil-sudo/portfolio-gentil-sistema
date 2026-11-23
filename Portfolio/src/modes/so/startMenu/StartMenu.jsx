@@ -1,11 +1,11 @@
 import './startMenu.css'
 import { useEffect, useRef, useState } from 'react'
-import { MdLockOutline, MdOutlinePowerSettingsNew, MdRestartAlt } from "react-icons/md";
+import { MdLogout, MdOutlineArticle, MdOutlinePowerSettingsNew } from "react-icons/md";
 import Logo from '../../../assets/imgs/logo.png'
 import perfil from '../../../content/perfil'
 import { useLanguage } from '../../../i18n/LanguageContext'
 
-function StartMenu({ apps, onOpen, onLock, onRestart }) {
+function StartMenu({ apps, onOpen, onSwitchMode, onExit }) {
     const [open, setOpen] = useState(false)
     const [powerOpen, setPowerOpen] = useState(false)
     const menuRef = useRef(null)
@@ -71,11 +71,11 @@ function StartMenu({ apps, onOpen, onLock, onRestart }) {
                         <div className='startMenu-power'>
                             {powerOpen && (
                                 <div className='startMenu-powerOptions' role='menu' aria-label={t.startMenu.powerOptions}>
-                                    <button role='menuitem' onClick={() => run(onLock)}>
-                                        <MdLockOutline /> {t.startMenu.lock}
+                                    <button role='menuitem' onClick={() => run(onSwitchMode)}>
+                                        <MdOutlineArticle /> {t.modeSwitch.toRecruiter}
                                     </button>
-                                    <button role='menuitem' onClick={() => run(onRestart)}>
-                                        <MdRestartAlt /> {t.startMenu.restart}
+                                    <button role='menuitem' onClick={() => run(onExit)}>
+                                        <MdLogout /> {t.startMenu.exit}
                                     </button>
                                 </div>
                             )}

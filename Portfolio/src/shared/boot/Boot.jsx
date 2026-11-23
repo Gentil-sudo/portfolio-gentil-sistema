@@ -3,21 +3,53 @@ import { useEffect, useState } from 'react'
 import Logo from '../../assets/imgs/logo.png'
 import { useLanguage } from '../../i18n/LanguageContext'
 
-const BOOT_DURATION = 2800
-const FADE_DURATION = 500
+// Some assim que o essencial carrega, sem tempo mínimo artificial.
+// MAX_WAIT só garante que ninguém fica preso se uma imagem travar.
+const FADE_DURATION = 300
+const MAX_WAIT = 4000
 
-function Boot({ onDone }) {
+function waitForPageLoad() {
+    if (document.readyState === 'complete') return Promise.resolve()
+    return new Promise((resolve) => window.addEventListener('load', resolve, { once: true }))
+}
+
+function preloadImage(src) {
+    const image = new Image()
+    image.src = src
+    return image.decode().catch(() => {})
+}
+
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+// preload: imagens da próxima tela, para ela já abrir completa
+function Boot({ onDone, preload }) {
     const [leaving, setLeaving] = useState(false)
     const { t } = useLanguage()
 
     useEffect(() => {
-        const fadeTimer = setTimeout(() => setLeaving(true), BOOT_DURATION)
-        const doneTimer = setTimeout(onDone, BOOT_DURATION + FADE_DURATION)
+        let cancelled = false
+        let doneTimer = null
+
+        const ready = Promise.all([waitForPageLoad(), ...(preload ?? []).map(preloadImage)])
+        const limit = new Promise((resolve) => setTimeout(resolve, MAX_WAIT))
+
+        Promise.race([ready, limit]).then(() => {
+            if (cancelled) return
+            if (prefersReducedMotion()) {
+                onDone()
+                return
+            }
+            setLeaving(true)
+            doneTimer = setTimeout(onDone, FADE_DURATION)
+        })
+
         return () => {
-            clearTimeout(fadeTimer)
+            cancelled = true
             clearTimeout(doneTimer)
         }
-    }, [onDone])
+    }, [onDone, preload])
 
     return (
         <div className={`boot ${leaving ? 'boot-leaving' : ''}`} role='status' aria-label={t.boot.loading}>
