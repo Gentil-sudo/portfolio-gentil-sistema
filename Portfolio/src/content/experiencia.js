@@ -39,6 +39,10 @@ const experiencia = [
             pt: 'Desenvolvimento em equipe com Scrum: sprints e quadro Kanban. Aplicação com React, Spring Boot e MongoDB Atlas, com endpoints de publicações (texto e imagem).',
             en: 'Team development with Scrum: sprints and a Kanban board. Application built with React, Spring Boot and MongoDB Atlas, with endpoints for text and image posts.',
         },
+        link: {
+            href: 'https://plf-es-2026-2-ti2-7600100-mais-saude.onrender.com/#/',
+            label: { pt: 'Ver o +Saúde online', en: 'See +Saúde live' },
+        },
     },
     // PENDENTE: projeto de extensão (parceiro e o que foi feito)
     {

@@ -15,6 +15,7 @@
 //   whatIDid           o que eu fiz (importante em projeto de equipe)
 //   technicalHighlight o destaque técnico do projeto
 //   archive            true = estudo antigo, vai para o bloco "Arquivo"
+//   inProgress         true = ainda em desenvolvimento
 //
 // Campos ainda null estão PENDENTES: não inventar, perguntar ao Enzo.
 
@@ -25,18 +26,23 @@ const projetos = [
     {
         id: 'gfinancas',
         name: 'GFinanças',
-        date: null, // PENDENTE
+        repo: 'GFinancas',
+        date: '2026-11',
         featured: true,
         featuredOrder: 1,
-        context: null, // PENDENTE
+        context: 'pessoal',
+        inProgress: true,
         description: {
-            pt: 'Organizador financeiro pessoal com login e Supabase, feito para substituir a planilha de gastos.',
-            en: 'Personal finance organizer with login and Supabase, built to replace my spending spreadsheet.',
+            pt: 'Organizador financeiro pessoal com lançamentos, compras parceladas, metas e investimentos, salvos no Supabase com login, feito para substituir a planilha de gastos.',
+            en: 'Personal finance organizer with entries, installment purchases, goals and investments, stored in Supabase behind a login, built to replace my spending spreadsheet.',
         },
-        stack: ['Supabase'], // PENDENTE: stack completa
-        repo: null, // PENDENTE
+        stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'TanStack Query', 'Zod', 'Recharts', 'PWA', 'Supabase (Auth + Postgres)'],
         demo: 'https://gfinc.vercel.app',
-        technicalHighlight: null, // PENDENTE
+        // Tirado do repositório (migrations e testes do Supabase): confirmar com o Enzo
+        technicalHighlight: {
+            pt: 'Segurança no banco: Row Level Security em todas as tabelas, com testes de isolamento entre dois usuários, e histórico de auditoria que só as funções do banco conseguem gravar. Funciona como PWA e exporta backup em .xlsx.',
+            en: 'Database-level security: Row Level Security on every table, with isolation tests between two users, and an audit log that only database functions can write to. Works as a PWA and exports backups to .xlsx.',
+        },
     },
     {
         id: 'alugaaqui',
@@ -46,13 +52,12 @@ const projetos = [
         featured: true,
         featuredOrder: 2,
         context: 'puc',
-        team: null, // PENDENTE: confirmar se foi individual ou em grupo
         description: {
             pt: 'Aluguel de carros (Lab 02 · PUC Minas): pedido online, análise por empresas e bancos, contrato de crédito e contas demo de Cliente, Empresa e Banco.',
             en: 'Car rental platform (Lab 02 · PUC Minas): online requests, review by companies and banks, credit contracts and demo accounts for Customer, Company and Bank.',
         },
         stack: ['React', 'React Router', 'Vite', 'Java', 'Spring Boot', 'Spring Security (JWT)', 'PostgreSQL (Supabase)', 'Docker'],
-        demo: 'https://lab2-diw.vercel.app',
+        demo: 'https://lab2-diw.vercel.app/login',
         // Tirado do README do repositório: confirmar com o Enzo
         technicalHighlight: {
             pt: 'Autenticação stateless com JWT, que deixa o back-end rodar em containers que "dormem" no plano gratuito sem derrubar o login; contrato de crédito com parcelas pela tabela Price.',
@@ -72,8 +77,8 @@ const projetos = [
             en: 'Team project with 6 people, run in sprints with a Kanban board: React on the front end, Spring Boot and MongoDB Atlas on the back end, with endpoints for text and image posts.',
         },
         stack: ['React', 'Spring Boot', 'MongoDB Atlas'],
-        repo: null, // PENDENTE
-        demo: null, // PENDENTE: deploy, se houver
+        repo: null, // Repositório da faculdade, ainda privado: o Enzo vai fazer um fork público
+        demo: 'https://plf-es-2026-2-ti2-7600100-mais-saude.onrender.com/#/',
         whatIDid: null, // PENDENTE: confirmar a minha parte
     },
     {
@@ -93,6 +98,17 @@ const projetos = [
     },
 
     /* ---------------- Demais projetos ---------------- */
+    {
+        id: 'autogest',
+        repo: 'AutoGest',
+        name: 'AutoGest',
+        date: '2026-11',
+        description: {
+            pt: 'Sistema de gestão de concessionária em Java 25, aplicando orientação a objetos: encapsulamento, herança e polimorfismo.',
+            en: 'Car dealership management system in Java 25, applying object-oriented programming: encapsulation, inheritance and polymorphism.',
+        },
+        stack: ['Java', { pt: 'POO', en: 'OOP' }],
+    },
     {
         id: 'calltabs-cemig-saude',
         repo: 'CallTabs-Cemig-Saude',
@@ -278,6 +294,7 @@ const projetos = [
 ].map(({ owner = GITHUB_USER, ...project }) => ({
     featured: false,
     archive: false,
+    inProgress: false,
     context: null,
     team: null,
     whatIDid: null,
