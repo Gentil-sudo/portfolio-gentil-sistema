@@ -4,13 +4,13 @@ import { LANGUAGES, LanguageContext } from './LanguageContext'
 
 const STORAGE_KEY = 'portfolio-language'
 
-// Escolha salva → idioma do navegador → português
+// Escolha salva → português (o inglês é opção, pelo seletor PT/EN)
 function getInitialLanguage() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY)
         if (LANGUAGES.includes(saved)) return saved
     } catch {}
-    return navigator.language?.toLowerCase().startsWith('pt') === false ? 'en' : 'pt'
+    return 'pt'
 }
 
 export function LanguageProvider({ children }) {

@@ -2,10 +2,10 @@ import './login.css'
 import { useEffect, useRef, useState } from 'react'
 import { IoArrowForward } from "react-icons/io5";
 import Wallpaper from '../../assets/videos/fundo.webp'
-import Profile from '../../assets/imgs/profile.webp'
+import perfil from '../../content/perfil'
 import { LANGUAGES, useLanguage } from '../../i18n/LanguageContext'
 
-const USER_NAME = 'Enzo Gentil'
+const USER_NAME = perfil.name
 const SIGN_IN_DURATION = 1200
 const FADE_DURATION = 500
 
@@ -86,7 +86,7 @@ function Login({ onDone }) {
             </div>
 
             <div className='login-user' aria-hidden={!showUser}>
-                <img src={Profile} alt={t.login.photo(USER_NAME)} className='login-avatar' />
+                <img src={perfil.photo}alt={t.login.photo(USER_NAME)} className='login-avatar' />
                 <h1 className='login-name'>{USER_NAME}</h1>
 
                 {step === 'user' ? (

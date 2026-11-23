@@ -2,7 +2,7 @@ import './startMenu.css'
 import { useEffect, useRef, useState } from 'react'
 import { MdLockOutline, MdOutlinePowerSettingsNew, MdRestartAlt } from "react-icons/md";
 import Logo from '../../assets/imgs/logo.png'
-import Profile from '../../assets/imgs/profile.webp'
+import perfil from '../../content/perfil'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 function StartMenu({ apps, onOpen, onLock, onRestart }) {
@@ -64,8 +64,8 @@ function StartMenu({ apps, onOpen, onLock, onRestart }) {
 
                     <footer className='startMenu-footer'>
                         <div className='startMenu-user'>
-                            <img src={Profile} alt='' className='startMenu-avatar' />
-                            <span>Enzo Gentil</span>
+                            <img src={perfil.photo} alt='' className='startMenu-avatar' />
+                            <span>{perfil.name}</span>
                         </div>
 
                         <div className='startMenu-power'>

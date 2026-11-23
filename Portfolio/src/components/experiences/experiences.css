@@ -80,6 +80,20 @@
     line-height: 1.5;
 }
 
+.experiences-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--accent);
+}
+
+.experiences-link:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     .experiences-header {
         flex-direction: column;

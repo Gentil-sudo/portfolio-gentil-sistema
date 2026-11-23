@@ -1,5 +1,5 @@
 // Textos da interface em português e inglês.
-// Os textos de conteúdo (projetos, experiências, sobre) ficam em src/data/.
+// Os textos de conteúdo (perfil, projetos, experiências) ficam em src/content/.
 
 const translations = {
     pt: {
@@ -47,6 +47,11 @@ const translations = {
             placeholder: 'Em construção...',
         },
 
+        about: {
+            greeting: 'Olá, eu sou',
+            infoTitle: 'Informações',
+            wakatimeTitle: 'Linguagens que mais uso (WakaTime)',
+        },
         projects: {
             title: 'Linha do tempo',
             preview: (name) => `Prévia do projeto ${name}`,
@@ -193,6 +198,11 @@ const translations = {
             placeholder: 'Under construction...',
         },
 
+        about: {
+            greeting: "Hi, I'm",
+            infoTitle: 'Details',
+            wakatimeTitle: 'Languages I use the most (WakaTime)',
+        },
         projects: {
             title: 'Timeline',
             preview: (name) => `Preview of ${name}`,

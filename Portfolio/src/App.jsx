@@ -8,7 +8,7 @@ import About from './components/about/About'
 import Contact from './components/contact/Contact'
 import Boot from './components/boot/Boot'
 import Login from './components/login/Login'
-import apps from './data/apps'
+import apps from './config/apps'
 import useTheme from './hooks/useTheme'
 import { useLanguage } from './i18n/LanguageContext'
 

@@ -2,10 +2,9 @@ import './contact.css'
 import { useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
-import contacts from '../../data/contacts'
+import perfil, { EMAIL as MY_EMAIL } from '../../content/perfil'
 import { useLanguage } from '../../i18n/LanguageContext'
 
-const MY_EMAIL = 'enzogentil.profissional@gmail.com'
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 
 const emptyForm = { name: '', email: '', subject: '', message: '' }
@@ -13,7 +12,7 @@ const emptyForm = { name: '', email: '', subject: '', message: '' }
 function ContactLinks() {
     return (
         <ul className='contact-links'>
-            {contacts.map(({ id, label, href, icon: Icon }) => (
+            {perfil.contacts.map(({ id, label, href, icon: Icon }) => (
                 <li key={id}>
                     <a
                         href={href}
@@ -90,7 +89,7 @@ function Contact() {
 
                 <div className='contact-field'>
                     <span className='contact-label'>{text.to}</span>
-                    <span className='contact-to'>Enzo Gentil &lt;{MY_EMAIL}&gt;</span>
+                    <span className='contact-to'>{perfil.name} &lt;{MY_EMAIL}&gt;</span>
                 </div>
                 <label className='contact-field'>
                     <span className='contact-label'>{text.name}</span>

@@ -9,7 +9,7 @@ export function useLanguage() {
     return useContext(LanguageContext)
 }
 
-// Textos dos arquivos de data/: { pt: '...', en: '...' } ou uma string só
+// Textos dos arquivos de content/: { pt: '...', en: '...' } ou uma string só
 export function localize(value, language) {
     if (value && typeof value === 'object') return value[language] ?? value.pt
     return value

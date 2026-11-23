@@ -1,0 +1,61 @@
+// Experiências: lidas pelos dois modos (SO e recrutador).
+// Textos: uma string só (igual nos dois idiomas) ou { pt, en }
+// status: 'atual' | 'em-breve' | 'concluido' (rótulos em src/i18n/translations.js)
+// link: { href, label: { pt, en } } opcional
+// Campos ainda null estão PENDENTES: não inventar, perguntar ao Enzo.
+
+const experiencia = [
+    {
+        id: 'nasa-space-apps',
+        organization: 'NASA Space Apps Challenge',
+        role: {
+            pt: 'Participante — time AuroraPucMinas (4 pessoas)',
+            en: 'Participant — team AuroraPucMinas (4 people)',
+        },
+        type: 'Hackathon',
+        period: '2026',
+        status: 'concluido',
+        // Tirado do README do repositório do time: confirmar com o Enzo
+        description: {
+            pt: 'No desafio Junior Astronaut Mission Trainer, o time criou o Aurora Station: um jogo para crianças de 7 a 12 anos em que o jogador comanda uma estação espacial em órbita de Marte e aprende fatos reais da NASA. Feito com React, TypeScript e Phaser.',
+            en: 'For the Junior Astronaut Mission Trainer challenge, the team built Aurora Station: a game for kids aged 7 to 12 in which the player commands a space station orbiting Mars and learns real NASA facts. Built with React, TypeScript and Phaser.',
+        },
+        link: {
+            href: 'https://hackathon-nasa-aurora.vercel.app',
+            label: { pt: 'Jogar o Aurora Station', en: 'Play Aurora Station' },
+        },
+    },
+    {
+        id: 'mais-saude',
+        organization: '+Saúde',
+        role: {
+            pt: 'Equipe de desenvolvimento (6 pessoas)',
+            en: 'Development team (6 people)',
+        },
+        type: { pt: 'Projeto em equipe', en: 'Team project' },
+        period: null, // PENDENTE
+        status: null, // PENDENTE
+        description: {
+            pt: 'Desenvolvimento em equipe com Scrum: sprints e quadro Kanban. Aplicação com React, Spring Boot e MongoDB Atlas, com endpoints de publicações (texto e imagem).',
+            en: 'Team development with Scrum: sprints and a Kanban board. Application built with React, Spring Boot and MongoDB Atlas, with endpoints for text and image posts.',
+        },
+    },
+    // PENDENTE: projeto de extensão (parceiro e o que foi feito)
+    {
+        id: 'puc-minas',
+        organization: 'PUC Minas',
+        role: {
+            pt: 'Graduação em Engenharia de Software',
+            en: "Bachelor's in Software Engineering",
+        },
+        type: { pt: 'Acadêmico', en: 'Academic' },
+        period: { pt: '2026 – 2029 (previsão)', en: '2026 – 2029 (expected)' },
+        status: 'atual',
+        description: {
+            pt: 'Desenvolvimento de projetos práticos nas disciplinas de DIW, DIAW e Programação Modular, com HTML, CSS, JavaScript, JSON Server e Java. Ingresso com 1º lugar no ProUni para o curso.',
+            en: 'Building hands-on projects in the DIW, DIAW and Modular Programming courses with HTML, CSS, JavaScript, JSON Server and Java. Admitted by ranking 1st in ProUni for the program.',
+        },
+    },
+]
+
+export default experiencia

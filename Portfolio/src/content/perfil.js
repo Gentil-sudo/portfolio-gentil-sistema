@@ -1,0 +1,77 @@
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
+import { MdOutlineEmail } from 'react-icons/md'
+import Photo from '../assets/imgs/profile.webp'
+
+// Quem eu sou: lido pelos dois modos (SO e recrutador).
+// Textos: uma string só (igual nos dois idiomas) ou { pt, en }.
+// Os rótulos da interface ("Olá, eu sou", "Informações"...) ficam em src/i18n/translations.js
+
+export const EMAIL = 'enzogentil.profissional@gmail.com'
+
+const perfil = {
+    name: 'Enzo Gentil',
+    fullName: 'Enzo Gentil Xavier Barroso',
+    initials: 'EG',
+    photo: Photo,
+
+    title: {
+        pt: 'Estudante de Engenharia de Software',
+        en: 'Software Engineering Student',
+    },
+    // Linha curta para a tela de escolha e os cabeçalhos
+    headline: {
+        pt: 'Estudante de Engenharia de Software · PUC Minas',
+        en: 'Software Engineering Student · PUC Minas',
+    },
+    // Resumo de uma linha (janela Destaques e hero do modo recrutador)
+    summary: {
+        pt: 'Estudante de Engenharia de Software na PUC Minas (1º lugar no ProUni), focado em desenvolvimento web com React, Next.js, Node.js e Java.',
+        en: 'Software Engineering student at PUC Minas (ranked 1st in ProUni), focused on web development with React, Next.js, Node.js and Java.',
+    },
+    location: 'Belo Horizonte',
+    // PENDENTE: modalidades aceitas (presencial, híbrido, remoto)
+    objective: {
+        pt: 'Primeiro estágio em desenvolvimento, em Belo Horizonte',
+        en: 'First internship as a developer, in Belo Horizonte',
+    },
+
+    // PENDENTE: caminho do PDF do currículo (ex.: '/curriculo-enzo-gentil.pdf' em public/)
+    resume: null,
+
+    contacts: [
+        { id: 'email', label: 'E-mail', href: `mailto:${EMAIL}`, icon: MdOutlineEmail },
+        { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/5533998287887', icon: FaWhatsapp },
+        { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/enzo-gentil-xavier/', icon: FaLinkedin },
+        { id: 'github', label: 'GitHub', href: 'https://github.com/Gentil-sudo', icon: FaGithub },
+    ],
+
+    // Texto da janela "Sobre mim"
+    about: {
+        pt: {
+            paragraphs: [
+                'Tenho 21 anos e curso Engenharia de Software na PUC Minas (2026 – 2029, previsão). Conquistei minha vaga sendo aprovado em 1º lugar no ProUni para o curso.',
+                'Minha área de atuação é o desenvolvimento web. Já criei projetos com HTML, CSS, JavaScript, React, Next.js e Node.js, e na faculdade venho aprofundando em Java e programação orientada a objetos.',
+                'Meu objetivo é conquistar meu primeiro estágio na área de desenvolvimento, continuar evoluindo como engenheiro de software e participar de projetos e eventos que me desafiem, como o NASA Space Apps Challenge 2026, de que participei com o time AuroraPucMinas.',
+            ],
+            info: [
+                { label: 'Formação', value: 'Engenharia de Software — PUC Minas (2026 – 2029, previsão)' },
+                { label: 'Destaque', value: '1º lugar no ProUni para Engenharia de Software' },
+                { label: 'Interesses', value: 'Desenvolvimento web, front-end, back-end e hackathons' },
+            ],
+        },
+        en: {
+            paragraphs: [
+                "I'm 21 years old and I study Software Engineering at PUC Minas (2026 – 2029, expected). I earned my place by ranking 1st in ProUni (Brazil's university scholarship program) for the course.",
+                "My field is web development. I've built projects with HTML, CSS, JavaScript, React, Next.js and Node.js, and at university I've been going deeper into Java and object-oriented programming.",
+                'My goal is to land my first internship as a developer, keep growing as a software engineer and take part in projects and events that challenge me, such as the NASA Space Apps Challenge 2026, which I joined with team AuroraPucMinas.',
+            ],
+            info: [
+                { label: 'Education', value: 'Software Engineering — PUC Minas (2026 – 2029, expected)' },
+                { label: 'Highlight', value: 'Ranked 1st in ProUni for Software Engineering' },
+                { label: 'Interests', value: 'Web development, front-end, back-end and hackathons' },
+            ],
+        },
+    },
+}
+
+export default perfil
