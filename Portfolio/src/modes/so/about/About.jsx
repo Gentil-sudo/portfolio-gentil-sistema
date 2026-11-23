@@ -1,7 +1,7 @@
 import './about.css'
-import perfil from '../../content/perfil'
+import perfil from '../../../content/perfil'
 import WakaTimeStats from '../wakaTimeStats/WakaTimeStats'
-import { localize, useLanguage } from '../../i18n/LanguageContext'
+import { localize, useLanguage } from '../../../i18n/LanguageContext'
 
 function About () {
     const { t, language } = useLanguage()

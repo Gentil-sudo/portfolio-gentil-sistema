@@ -1,9 +1,9 @@
 import './startMenu.css'
 import { useEffect, useRef, useState } from 'react'
 import { MdLockOutline, MdOutlinePowerSettingsNew, MdRestartAlt } from "react-icons/md";
-import Logo from '../../assets/imgs/logo.png'
-import perfil from '../../content/perfil'
-import { useLanguage } from '../../i18n/LanguageContext'
+import Logo from '../../../assets/imgs/logo.png'
+import perfil from '../../../content/perfil'
+import { useLanguage } from '../../../i18n/LanguageContext'
 
 function StartMenu({ apps, onOpen, onLock, onRestart }) {
     const [open, setOpen] = useState(false)

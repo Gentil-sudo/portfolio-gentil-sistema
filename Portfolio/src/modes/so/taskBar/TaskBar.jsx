@@ -1,9 +1,9 @@
 
 import './taskBar.css'
-import ThemeButton from '../themeButton/ThemeButton'
-import LanguageButton from '../languageButton/LanguageButton'
+import ThemeButton from '../../../shared/themeButton/ThemeButton'
+import LanguageButton from '../../../shared/languageButton/LanguageButton'
 import StartMenu from "../startMenu/StartMenu"
-import { useLanguage } from '../../i18n/LanguageContext'
+import { useLanguage } from '../../../i18n/LanguageContext'
 
 function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, onLock, onRestart, onShowDesktop }) {
     const { t } = useLanguage()

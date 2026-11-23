@@ -2,8 +2,8 @@ import './contact.css'
 import { useState } from 'react'
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
-import perfil, { EMAIL as MY_EMAIL } from '../../content/perfil'
-import { useLanguage } from '../../i18n/LanguageContext'
+import perfil, { EMAIL as MY_EMAIL } from '../../../content/perfil'
+import { useLanguage } from '../../../i18n/LanguageContext'
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 

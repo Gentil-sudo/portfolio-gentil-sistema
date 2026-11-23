@@ -1,7 +1,7 @@
 import './home.css'
-import ThemeButton from '../themeButton/ThemeButton'
-import LanguageButton from '../languageButton/LanguageButton'
-import { useLanguage } from '../../i18n/LanguageContext'
+import ThemeButton from '../../../shared/themeButton/ThemeButton'
+import LanguageButton from '../../../shared/languageButton/LanguageButton'
+import { useLanguage } from '../../../i18n/LanguageContext'
 
 function Home({ apps, onOpen, theme, onToggleTheme }) {
   const { t } = useLanguage()

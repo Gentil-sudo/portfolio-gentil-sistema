@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FiActivity, FiAward, FiClock, FiExternalLink, FiSun, FiCode } from "react-icons/fi";
-import WAKATIME_CONFIG from "../../config/wakatimeConfig";
-import { useLanguage } from "../../i18n/LanguageContext";
-import { fetchWakaTimeStats } from "../../services/wakatimeService";
+import WAKATIME_CONFIG from "../../../config/wakatimeConfig";
+import { useLanguage } from "../../../i18n/LanguageContext";
+import { fetchWakaTimeStats } from "../../../services/wakatimeService";
 import CodingNow from "./CodingNow";
 import { formatDate, formatDuration, formatNumber, formatPercent } from "./format";
 import { languageColor } from "./languageColors";

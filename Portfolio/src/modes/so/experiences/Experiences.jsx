@@ -1,7 +1,7 @@
 import './experiences.css'
 import { FiExternalLink } from "react-icons/fi";
-import experiencia from '../../content/experiencia'
-import { localize, useLanguage } from '../../i18n/LanguageContext'
+import experiencia from '../../../content/experiencia'
+import { localize, useLanguage } from '../../../i18n/LanguageContext'
 
 function Experiences() {
     const { t, language } = useLanguage()

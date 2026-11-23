@@ -1,8 +1,8 @@
 import './projects.css'
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
-import projetos from '../../content/projetos'
-import { localize, useLanguage } from '../../i18n/LanguageContext'
+import projetos from '../../../content/projetos'
+import { localize, useLanguage } from '../../../i18n/LanguageContext'
 
 // Linha do tempo do mais antigo para o mais novo (a ordem atual do modo SO);
 // projetos ainda sem data ficam no fim

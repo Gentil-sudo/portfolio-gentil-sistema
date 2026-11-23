@@ -1,7 +1,7 @@
 import './explorer.css'
 import { useEffect, useRef, useState } from 'react'
 import { VscChromeMinimize, VscChromeMaximize, VscChromeRestore, VscChromeClose } from "react-icons/vsc";
-import { useLanguage } from '../../i18n/LanguageContext'
+import { useLanguage } from '../../../i18n/LanguageContext'
 
 function Explorer({ app, hidden, onClose, onMinimize, children }) {
     const [maximized, setMaximized] = useState(false)
