@@ -29,22 +29,21 @@ const experiencia = [
         id: 'mais-saude',
         organization: '+Saúde',
         role: {
-            pt: 'Equipe de desenvolvimento (6 pessoas)',
-            en: 'Development team (6 people)',
+            pt: 'Back-end e deploy — equipe de 6 pessoas',
+            en: 'Back end and deployment — team of 6',
         },
         type: { pt: 'Projeto em equipe', en: 'Team project' },
         period: null, // PENDENTE
         status: null, // PENDENTE
         description: {
-            pt: 'Desenvolvimento em equipe com Scrum: sprints e quadro Kanban. Aplicação com React, Spring Boot e MongoDB Atlas, com endpoints de publicações (texto e imagem).',
-            en: 'Team development with Scrum: sprints and a Kanban board. Application built with React, Spring Boot and MongoDB Atlas, with endpoints for text and image posts.',
+            pt: 'Desenvolvimento em equipe com Scrum: sprints e quadro Kanban, com React, Spring Boot e MongoDB Atlas. Fiquei com o back-end, o deploy e as funcionalidades de mapa da saúde e de eventos.',
+            en: 'Team development with Scrum: sprints and a Kanban board, using React, Spring Boot and MongoDB Atlas. I handled the back end, the deployment and the health map and events features.',
         },
         link: {
             href: 'https://plf-es-2026-2-ti2-7600100-mais-saude.onrender.com/#/',
             label: { pt: 'Ver o +Saúde online', en: 'See +Saúde live' },
         },
     },
-    // PENDENTE: projeto de extensão (parceiro e o que foi feito)
     {
         id: 'puc-minas',
         organization: 'PUC Minas',
