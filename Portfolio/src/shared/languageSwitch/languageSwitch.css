@@ -27,6 +27,6 @@
 }
 
 .languageSwitch button[aria-pressed='true'] {
-    color: #fff;
+    color: var(--switch-active-text, #fff);
     background-color: var(--switch-active, var(--accent-strong));
 }

@@ -23,10 +23,15 @@ const perfil = {
         pt: 'Estudante de Engenharia de Software · PUC Minas',
         en: 'Software Engineering Student · PUC Minas',
     },
-    // Resumo de uma linha (janela Destaques e hero do modo recrutador)
+    // Frase de abertura do modo recrutador
+    pitch: {
+        pt: 'Construo aplicações web completas, do banco de dados à interface.',
+        en: 'I build complete web applications, from the database to the interface.',
+    },
+    // Resumo curto (janela Destaques e hero do modo recrutador)
     summary: {
-        pt: 'Estudante de Engenharia de Software na PUC Minas (1º lugar no ProUni), focado em desenvolvimento web com React, Next.js, Node.js e Java.',
-        en: 'Software Engineering student at PUC Minas (ranked 1st in ProUni), focused on web development with React, Next.js, Node.js and Java.',
+        pt: 'Estudante de Engenharia de Software na PUC Minas, aprovado em 1º lugar no ProUni. Uso React e TypeScript no front-end e Java com Spring Boot no back-end, com PostgreSQL e MongoDB.',
+        en: 'Software Engineering student at PUC Minas, ranked 1st in ProUni for the program. I use React and TypeScript on the front end and Java with Spring Boot on the back end, with PostgreSQL and MongoDB.',
     },
     location: 'Belo Horizonte',
     objective: {

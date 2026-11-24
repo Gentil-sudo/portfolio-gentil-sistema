@@ -8,7 +8,7 @@
 //   stack              tecnologias usadas
 //   repo               nome do repositório no GitHub (owner: dono, se não for o meu); null = sem repo público
 //   demo               link do deploy, se houver
-//   image              prévia; sem ela, usa a imagem Open Graph do GitHub
+//   image              prévia (captura 800×500 em src/assets/projetos); sem ela, usa a imagem Open Graph do GitHub
 //   featured           true = aparece nos destaques; featuredOrder = posição neles
 //   context            'pessoal' | 'puc' | 'equipe' (rótulos em src/i18n/translations.js)
 //   team               tamanho da equipe (null = sozinho ou ainda não informado)
@@ -19,12 +19,18 @@
 //
 // Campos ainda null estão PENDENTES: não inventar, perguntar ao Enzo.
 
+import imgGfinancas from '../assets/projetos/gfinancas.webp'
+import imgAlugaAqui from '../assets/projetos/alugaaqui.webp'
+import imgMaisSaude from '../assets/projetos/mais-saude.webp'
+import imgAurora from '../assets/projetos/aurora-station.webp'
+
 const GITHUB_USER = 'Gentil-sudo'
 
 const projetos = [
     /* ---------------- Destaques ---------------- */
     {
         id: 'gfinancas',
+        image: imgGfinancas, // tela de login: trocar por um print de dentro do app
         name: 'GFinanças',
         repo: 'GFinancas',
         date: '2026-11',
@@ -45,6 +51,7 @@ const projetos = [
     },
     {
         id: 'alugaaqui',
+        image: imgAlugaAqui,
         name: 'AlugaAqui',
         repo: 'lab2Diw',
         date: '2026-11',
@@ -65,6 +72,7 @@ const projetos = [
     },
     {
         id: 'mais-saude',
+        image: imgMaisSaude,
         name: '+Saúde',
         date: '2026-08', // início (ago. – dez. 2026)
         inProgress: true,
@@ -86,6 +94,7 @@ const projetos = [
     },
     {
         id: 'aurora-station',
+        image: imgAurora,
         name: 'Aurora Station',
         owner: 'gabiscamp', // repositório oficial do time
         repo: 'hackathon_nasa_aurora',

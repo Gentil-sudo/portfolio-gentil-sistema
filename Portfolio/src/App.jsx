@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
-import SoMode from './modes/so/SoMode'
-import RecruiterMode from './modes/recrutador/RecruiterMode'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import Boot from './shared/boot/Boot'
 import Choice from './shared/choice/Choice'
 import perfil from './content/perfil'
@@ -14,6 +12,11 @@ import {
     saveMode,
     urlForMode,
 } from './shared/mode'
+
+// Cada modo é baixado só quando abre: quem chega pelo link do recrutador
+// não carrega o SO (e vice-versa)
+const SoMode = lazy(() => import('./modes/so/SoMode'))
+const RecruiterMode = lazy(() => import('./modes/recrutador/RecruiterMode'))
 
 // A tela de escolha já abre com a foto carregada
 const BOOT_PRELOAD = [perfil.photo]
@@ -71,15 +74,19 @@ function App() {
 
     return (
         <>
-            {mode === 'so' && (
-                <SoMode
-                    theme={theme}
-                    onToggleTheme={toggleTheme}
-                    onSwitchMode={handleSwitchMode}
-                    onExit={handleExit}
-                />
-            )}
-            {mode === 'recrutador' && <RecruiterMode onSwitchMode={handleSwitchMode} />}
+            <Suspense fallback={null}>
+                {mode === 'so' && (
+                    <SoMode
+                        theme={theme}
+                        onToggleTheme={toggleTheme}
+                        onSwitchMode={handleSwitchMode}
+                        onExit={handleExit}
+                    />
+                )}
+                {mode === 'recrutador' && (
+                    <RecruiterMode theme={theme} onToggleTheme={toggleTheme} onSwitchMode={handleSwitchMode} />
+                )}
+            </Suspense>
             {mode === null && <Choice onChoose={handleChoose} />}
             {booting && <Boot onDone={handleBootDone} preload={BOOT_PRELOAD} />}
         </>
