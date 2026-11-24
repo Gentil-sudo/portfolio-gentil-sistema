@@ -5,7 +5,8 @@
 //   id                 identificador único
 //   name, description  nome e uma linha de descrição
 //   date               'AAAA-MM' (ordena do mais novo para o mais antigo); null = ainda sem data
-//   stack              tecnologias usadas
+//   stack              tecnologias usadas (lista completa)
+//   mainStack          as que definem o projeto, em tags no topo do cartão (sem ela: as 4 primeiras da stack)
 //   repo               nome do repositório no GitHub (owner: dono, se não for o meu); null = sem repo público
 //   demo               link do deploy, se houver
 //   image              captura 800×500 em src/assets/projetos (opcional)
@@ -36,6 +37,7 @@ const projetos = [
         date: '2026-11',
         featured: true,
         featuredOrder: 1,
+        mainStack: ['React', 'TypeScript', 'Supabase'],
         context: 'pessoal',
         inProgress: true,
         description: {
@@ -57,6 +59,7 @@ const projetos = [
         date: '2026-11',
         featured: true,
         featuredOrder: 2,
+        mainStack: ['React', 'Java', 'Spring Boot', 'PostgreSQL'],
         context: 'puc',
         description: {
             pt: 'Aluguel de carros (Lab 02 · PUC Minas): pedido online, análise por empresas e bancos, contrato de crédito e contas demo de Cliente, Empresa e Banco.',
@@ -78,6 +81,7 @@ const projetos = [
         inProgress: true,
         featured: true,
         featuredOrder: 3,
+        mainStack: ['React', 'Spring Boot', 'MongoDB'],
         context: 'equipe',
         team: 6,
         description: {
@@ -101,6 +105,7 @@ const projetos = [
         date: '2026-11', // criação do repositório oficial
         featured: true,
         featuredOrder: 4,
+        mainStack: ['React', 'TypeScript', 'Phaser'],
         context: 'equipe',
         team: 4,
         description: {
@@ -340,6 +345,7 @@ const projetos = [
     // Só capturas locais: a imagem automática do GitHub (opengraph) às vezes
     // falha (erro 429) e deixava a prévia quebrada
     image: project.image ?? null,
+    mainStack: project.mainStack ?? project.stack.slice(0, 4),
 }))
 
 // Mais novo primeiro; projetos ainda sem data vão para o fim

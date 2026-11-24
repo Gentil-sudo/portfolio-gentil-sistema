@@ -57,6 +57,9 @@ function Highlights({ onSwitchMode, onOpenApp }) {
                                 )}
                                 <div className='highlights-project-body'>
                                     <h4>{name}</h4>
+                                    <ul className='highlights-project-tags' aria-label={t.recruiter.mainStack}>
+                                        {project.mainStack.map((tech) => <li key={tech}>{tech}</li>)}
+                                    </ul>
                                     <p>{localize(project.description, language)}</p>
                                     <div className='highlights-project-links'>
                                         {project.demo && (
