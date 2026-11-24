@@ -1,0 +1,787 @@
+/* =========================================================
+   WAKATIME STATS
+   As cores vêm das variáveis do main.css (tema claro/escuro);
+   os valores depois da vírgula são só fallback.
+   ========================================================= */
+
+.waka {
+  --waka-brand: var(--accent, #e0449e);
+  --waka-brand-deep: var(--accent-2, #a855b0);
+  --waka-text: var(--text, #e8e0f0);
+  --waka-muted: var(--text-muted, #b9a8cc);
+  --waka-border: var(--border-soft, rgba(168, 85, 176, 0.3));
+  --waka-surface: var(--surface-soft, rgba(168, 85, 176, 0.12));
+  --waka-live: #2fb37a;
+  --waka-gradient: linear-gradient(135deg, #e0449e 0%, #a855b0 35%, #6a4c93 65%, #4a5a8a 100%);
+
+  /* Responde à largura da janela do Explorer, não da tela */
+  container-type: inline-size;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  color: var(--waka-text);
+}
+
+/* =========================================================
+   BARRA DE PERÍODO
+   ========================================================= */
+
+.waka-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.waka-ranges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  padding: 4px;
+
+  background: var(--waka-surface);
+
+  border: 1px solid var(--waka-border);
+  border-radius: 999px;
+}
+
+.waka-ranges button {
+  height: 30px;
+
+  padding: 0 12px;
+
+  color: var(--waka-brand-deep);
+
+  background: transparent;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.waka-ranges button:hover {
+  color: var(--waka-brand);
+}
+
+.waka-ranges button.active {
+  color: #fff;
+
+  background: var(--waka-brand);
+}
+
+.waka-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  color: var(--waka-brand-deep);
+
+  font-size: 13px;
+  font-weight: bold;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.waka-profile:hover {
+  color: var(--waka-brand);
+}
+
+/* =========================================================
+   CORPO (fica "apagado" enquanto troca de período)
+   ========================================================= */
+
+.waka-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  transition: opacity 0.2s ease;
+}
+
+.waka-body.updating {
+  opacity: 0.55;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   INDICADORES
+   ========================================================= */
+
+.waka-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+
+  list-style: none;
+}
+
+.waka-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  padding: 12px 16px;
+
+  background: var(--waka-surface);
+
+  border: 1px solid var(--waka-border);
+  border-radius: 8px;
+}
+
+.waka-kpi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  color: var(--waka-muted);
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+}
+
+.waka-kpi-label svg {
+  color: var(--waka-brand);
+
+  font-size: 1rem;
+}
+
+.waka-kpi-value {
+  color: var(--waka-text);
+
+  font-size: 20px;
+  font-weight: bold;
+
+  line-height: 1.2;
+}
+
+.waka-kpi-note {
+  color: var(--waka-muted);
+
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   BARRA DE LINGUAGENS (parte do todo)
+   ========================================================= */
+
+.waka-stack {
+  display: flex;
+  gap: 2px;
+
+  height: 12px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+}
+
+.waka-stack-seg {
+  min-width: 3px;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.waka-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+/* Só a lista de linguagens (sem editores e sistemas) */
+.waka-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.waka-card {
+  padding: 16px 20px;
+
+  background: var(--waka-surface);
+
+  border: 1px solid var(--waka-border);
+  border-radius: 8px;
+}
+
+.waka-card h3 {
+  margin-bottom: 16px;
+
+  color: var(--waka-brand);
+
+  font-size: 16px;
+}
+
+/* =========================================================
+   LISTA DE LINGUAGENS
+   ========================================================= */
+
+.waka-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  list-style: none;
+}
+
+.waka-row-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.6rem;
+
+  font-size: 0.9rem;
+}
+
+.waka-dot {
+  width: 10px;
+  height: 10px;
+
+  background: var(--lang);
+
+  border-radius: 50%;
+}
+
+.waka-name {
+  overflow: hidden;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waka-time {
+  color: var(--waka-muted);
+
+  font-size: 0.82rem;
+}
+
+.waka-pct {
+  min-width: 52px;
+
+  color: var(--waka-brand);
+
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+.waka-bar {
+  height: 6px;
+
+  margin-top: 0.4rem;
+
+  overflow: hidden;
+
+  background: var(--waka-border);
+
+  border-radius: 999px;
+}
+
+.waka-bar span {
+  display: block;
+
+  height: 100%;
+
+  background: var(--lang);
+
+  border-radius: inherit;
+
+  animation: waka-grow 0.6s ease both;
+}
+
+@keyframes waka-grow {
+  from {
+    width: 0;
+  }
+}
+
+.waka-row-rest {
+  color: var(--waka-muted);
+
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   MINI LISTAS (editores, sistemas, categorias)
+   ========================================================= */
+
+.waka-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.waka-mini h4 {
+  margin-bottom: 0.7rem;
+
+  color: var(--waka-muted);
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+}
+
+.waka-mini ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  list-style: none;
+}
+
+.waka-mini li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 0.6rem;
+
+  font-size: 0.85rem;
+}
+
+.waka-mini-name {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waka-mini-bar {
+  height: 6px;
+
+  overflow: hidden;
+
+  background: var(--waka-border);
+
+  border-radius: 999px;
+}
+
+.waka-mini-bar span {
+  display: block;
+
+  height: 100%;
+
+  background: var(--waka-gradient);
+
+  border-radius: inherit;
+}
+
+.waka-mini-pct {
+  color: var(--waka-muted);
+
+  font-size: 0.8rem;
+
+  text-align: right;
+}
+
+/* =========================================================
+   PROJETOS
+   ========================================================= */
+
+.waka-projects ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+
+  list-style: none;
+}
+
+.waka-projects li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  max-width: 100%;
+
+  padding: 4px 12px;
+
+  border: 1px solid var(--waka-border);
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+}
+
+.waka-projects span {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waka-projects strong {
+  flex-shrink: 0;
+
+  color: var(--waka-brand);
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CODANDO AGORA (CodingNow.jsx)
+   ========================================================= */
+
+.waka-now {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  padding: 16px 20px;
+
+  background: var(--waka-surface);
+
+  border: 1px solid var(--waka-border);
+  border-left: 4px solid var(--waka-live);
+  border-radius: 8px;
+}
+
+.waka-now-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.waka-now-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: var(--waka-live);
+
+  font-size: 12px;
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+.waka-now-dot {
+  position: relative;
+
+  width: 10px;
+  height: 10px;
+
+  background: currentColor;
+
+  border-radius: 50%;
+}
+
+/* Onda saindo da bolinha enquanto está codando */
+.waka-now.active .waka-now-dot::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: currentColor;
+
+  border-radius: 50%;
+
+  animation: waka-pulse 1.6s ease-out infinite;
+}
+
+@keyframes waka-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.waka-now-ago {
+  color: var(--waka-muted);
+
+  font-size: 0.8rem;
+}
+
+.waka-now-project {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+
+  min-width: 0;
+
+  font-size: 1.15rem;
+}
+
+/* Ícone + nome ficam juntos; nome comprido termina em "..." */
+.waka-now-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  min-width: 0;
+  max-width: 100%;
+}
+
+.waka-now-name svg {
+  flex-shrink: 0;
+
+  color: var(--waka-brand);
+}
+
+.waka-now-project strong {
+  overflow: hidden;
+
+  color: var(--waka-brand);
+
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waka-now-branch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  max-width: 100%;
+
+  padding: 2px 10px;
+
+  overflow: hidden;
+
+  color: var(--waka-muted);
+
+  border: 1px solid var(--waka-border);
+
+  border-radius: 999px;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.waka-now-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+
+  color: var(--waka-muted);
+
+  font-size: 0.85rem;
+
+  list-style: none;
+}
+
+.waka-now-meta li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.waka-now-meta svg {
+  color: var(--waka-brand);
+}
+
+/* Parado: uma linha só, sem destaque */
+.waka-now.idle {
+  --waka-live: var(--waka-muted);
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+
+  padding: 12px 16px;
+
+  border-left-color: var(--waka-border);
+}
+
+.waka-now-idle-text {
+  color: var(--waka-muted);
+
+  font-size: 0.85rem;
+}
+
+.waka-now-idle-text strong {
+  color: var(--waka-text);
+
+  font-weight: 500;
+}
+
+/* =========================================================
+   MENSAGENS, VAZIO, CARREGANDO
+   ========================================================= */
+
+.waka-message {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+.waka-message strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.waka-message.error {
+  color: var(--waka-text);
+
+  background: rgba(224, 68, 68, 0.15);
+
+  border: 1px solid rgba(224, 68, 68, 0.5);
+}
+
+.waka-message.warning {
+  color: var(--waka-text);
+
+  background: rgba(234, 179, 8, 0.15);
+
+  border: 1px solid rgba(234, 179, 8, 0.5);
+}
+
+.waka-empty,
+.waka-source {
+  color: var(--waka-muted);
+
+  font-size: 0.85rem;
+
+  text-align: center;
+}
+
+.waka-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.waka-skeleton-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.waka-skeleton span {
+  display: block;
+
+  height: 96px;
+
+  background: linear-gradient(
+    90deg,
+    var(--waka-surface) 25%,
+    var(--waka-border) 50%,
+    var(--waka-surface) 75%
+  );
+  background-size: 200% 100%;
+
+  border-radius: 8px;
+
+  animation: waka-shimmer 1.2s linear infinite;
+}
+
+.waka-skeleton .waka-skeleton-bar {
+  height: 12px;
+}
+
+.waka-skeleton .waka-skeleton-block {
+  height: 260px;
+}
+
+@keyframes waka-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@container (max-width: 720px) {
+  .waka-kpis,
+  .waka-skeleton-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .waka-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (max-width: 480px) {
+  .waka-kpis {
+    gap: 0.75rem;
+  }
+
+  .waka-kpi {
+    padding: 0.9rem;
+  }
+
+  .waka-kpi-value {
+    font-size: 1.05rem;
+  }
+
+  .waka-card {
+    padding: 1.15rem;
+  }
+
+  .waka-now {
+    padding: 0.95rem 1rem;
+  }
+
+  .waka-now-project {
+    font-size: 1rem;
+  }
+
+  .waka-ranges {
+    width: 100%;
+  }
+
+  .waka-ranges button {
+    flex: 1 1 auto;
+
+    padding: 0 0.6rem;
+  }
+}
+
+@container (max-width: 340px) {
+  .waka-kpis,
+  .waka-skeleton-kpis {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waka-bar span,
+  .waka-skeleton span,
+  .waka-now.active .waka-now-dot::after {
+    animation: none;
+  }
+}

@@ -1,17 +1,33 @@
 // Textos da interface em português e inglês.
-// Os textos de conteúdo (projetos, experiências, sobre) ficam em src/data/.
+// Os textos de conteúdo (perfil, projetos, experiências) ficam em src/content/.
 
 const translations = {
     pt: {
         htmlLang: 'pt-BR',
         locale: 'pt-BR',
-        pageTitle: 'Enzo Gentil | Portfólio',
+        // Título da aba e descrição por modo (ver src/App.jsx)
+        seo: {
+            titles: {
+                choice: 'Enzo Gentil — Desenvolvedor web | Portfólio',
+                recrutador: 'Enzo Gentil — Desenvolvedor web | Resumo para recrutadores',
+                so: 'Enzo Gentil — Portfólio interativo',
+            },
+            description: 'Portfólio de Enzo Gentil, estudante de Engenharia de Software na PUC Minas (1º lugar no ProUni). Projetos com React, TypeScript, Java e Spring Boot. Disponível para estágio em Belo Horizonte.',
+        },
 
         apps: {
+            destaques: 'Destaques',
             projetos: 'Projetos',
-            experiencias: 'Experiências',
+            experiencias: 'Experiência',
+            sobre: 'Sobre mim',
+            curriculo: 'Currículo.pdf',
             contato: 'Contato',
-            sobre: 'Sobre Mim',
+        },
+        highlights: {
+            photo: (name) => `Foto de ${name}`,
+            resume: 'Baixar currículo',
+            featured: 'Projetos em destaque',
+            allProjects: 'Ver todos os projetos',
         },
 
         language: {
@@ -22,11 +38,55 @@ const translations = {
         theme: { light: 'Modo claro', dark: 'Modo escuro' },
 
         boot: { loading: 'Carregando' },
-        login: {
-            hint: 'Clique ou pressione qualquer tecla para entrar',
+        choice: {
             photo: (name) => `Foto de ${name}`,
-            enter: 'Entrar',
-            welcome: 'Bem-vindo',
+            question: 'Como você quer ver o portfólio?',
+            recruiter: {
+                title: 'Modo recrutador',
+                description: 'Resumo em uma página: projetos, experiência, currículo e contato.',
+                cta: 'Ver o resumo',
+                badge: 'Mais rápido',
+            },
+            os: {
+                title: 'Explorar o portfólio',
+                description: 'A experiência interativa em formato de sistema operacional.',
+                cta: 'Abrir a área de trabalho',
+            },
+            remember: 'Lembrar minha escolha',
+        },
+        modeSwitch: {
+            toRecruiter: 'Modo recrutador',
+            toRecruiterHint: 'Ver o resumo em uma página',
+            toOs: 'Explorar modo SO',
+        },
+        recruiter: {
+            skip: 'Pular para o conteúdo',
+            nav: { label: 'Seções', projects: 'Projetos', experience: 'Experiência', contact: 'Contato' },
+            resume: 'Currículo',
+            resumeLong: 'Baixar currículo (PDF)',
+            available: (city) => `Disponível para estágio · ${city}`,
+            photo: (name) => `Foto de ${name}`,
+            seeProjects: 'Ver projetos',
+            talk: 'Falar comigo',
+            featuredTitle: 'Projetos em destaque',
+            context: { pessoal: 'Projeto pessoal', puc: 'PUC Minas', equipe: 'Em equipe' },
+            team: (n) => `${n} pessoas`,
+            inProgress: 'Em andamento',
+            whatIDid: 'O que fiz',
+            highlight: 'Destaque técnico',
+            stack: 'Stack',
+            demo: 'Ver online',
+            code: 'Código',
+            screenshot: (name) => `Tela do ${name}`,
+            newTab: '(abre em nova aba)',
+            allTitle: 'Todos os projetos',
+            allIntro: 'Do mais novo para o mais antigo.',
+            archive: (from, to, n) => `Arquivo: estudos de ${from} a ${to} (${n})`,
+            experienceTitle: 'Experiência',
+            stackTitle: 'Stack',
+            stackIntro: 'Só o que aparece nos projetos.',
+            contactTitle: 'Vamos conversar',
+            email: 'E-mail',
         },
         startMenu: {
             start: 'Iniciar',
@@ -34,8 +94,7 @@ const translations = {
             apps: 'Aplicativos',
             power: 'Energia',
             powerOptions: 'Opções de energia',
-            lock: 'Bloquear',
-            restart: 'Reiniciar',
+            exit: 'Sair para a tela de escolha',
         },
         taskBar: { showDesktop: 'Mostrar área de trabalho' },
         explorer: {
@@ -43,12 +102,21 @@ const translations = {
             maximize: 'Maximizar',
             restore: 'Restaurar',
             close: 'Fechar',
+            back: 'Voltar',
             thisPc: 'Este Computador',
             placeholder: 'Em construção...',
         },
 
+        about: {
+            greeting: 'Olá, eu sou',
+            infoTitle: 'Informações',
+            wakatimeTitle: 'Linguagens que mais uso (WakaTime)',
+        },
         projects: {
+            featured: 'Em destaque',
             title: 'Linha do tempo',
+            titleIntro: 'Do mais novo para o mais antigo.',
+            archive: (from, to, n) => `Arquivo: estudos de ${from} a ${to} (${n})`,
             preview: (name) => `Prévia do projeto ${name}`,
             repository: 'Repositório',
             demo: 'Ver online',
@@ -85,7 +153,7 @@ const translations = {
                 last_30_days: '30 dias',
                 last_6_months: '6 meses',
                 last_year: '1 ano',
-                all_time: 'Desde sempre',
+                all_time: 'Todo o tempo',
             },
             period: 'Período',
             profile: 'Ver perfil no WakaTime',
@@ -151,13 +219,28 @@ const translations = {
     en: {
         htmlLang: 'en',
         locale: 'en-US',
-        pageTitle: 'Enzo Gentil | Portfolio',
+        seo: {
+            titles: {
+                choice: 'Enzo Gentil — Web developer | Portfolio',
+                recrutador: 'Enzo Gentil — Web developer | Recruiter summary',
+                so: 'Enzo Gentil — Interactive portfolio',
+            },
+            description: 'Portfolio of Enzo Gentil, Software Engineering student at PUC Minas (ranked 1st in ProUni). Projects with React, TypeScript, Java and Spring Boot. Open to internships in Belo Horizonte, Brazil.',
+        },
 
         apps: {
+            destaques: 'Highlights',
             projetos: 'Projects',
             experiencias: 'Experience',
+            sobre: 'About me',
+            curriculo: 'Resume.pdf',
             contato: 'Contact',
-            sobre: 'About Me',
+        },
+        highlights: {
+            photo: (name) => `Photo of ${name}`,
+            resume: 'Download résumé',
+            featured: 'Featured projects',
+            allProjects: 'See all projects',
         },
 
         language: {
@@ -168,11 +251,55 @@ const translations = {
         theme: { light: 'Light mode', dark: 'Dark mode' },
 
         boot: { loading: 'Loading' },
-        login: {
-            hint: 'Click or press any key to sign in',
+        choice: {
             photo: (name) => `Photo of ${name}`,
-            enter: 'Sign in',
-            welcome: 'Welcome',
+            question: 'How would you like to see the portfolio?',
+            recruiter: {
+                title: 'Recruiter mode',
+                description: 'A one-page summary: projects, experience, résumé and contact.',
+                cta: 'See the summary',
+                badge: 'Fastest',
+            },
+            os: {
+                title: 'Explore the portfolio',
+                description: 'The interactive experience, styled as an operating system.',
+                cta: 'Open the desktop',
+            },
+            remember: 'Remember my choice',
+        },
+        modeSwitch: {
+            toRecruiter: 'Recruiter mode',
+            toRecruiterHint: 'See the one-page summary',
+            toOs: 'Explore OS mode',
+        },
+        recruiter: {
+            skip: 'Skip to content',
+            nav: { label: 'Sections', projects: 'Projects', experience: 'Experience', contact: 'Contact' },
+            resume: 'Résumé',
+            resumeLong: 'Download résumé (PDF)',
+            available: (city) => `Open to internships · ${city}`,
+            photo: (name) => `Photo of ${name}`,
+            seeProjects: 'See projects',
+            talk: 'Get in touch',
+            featuredTitle: 'Featured projects',
+            context: { pessoal: 'Personal project', puc: 'PUC Minas', equipe: 'Team project' },
+            team: (n) => `${n} people`,
+            inProgress: 'In progress',
+            whatIDid: 'What I did',
+            highlight: 'Technical highlight',
+            stack: 'Stack',
+            demo: 'Live demo',
+            code: 'Code',
+            screenshot: (name) => `Screenshot of ${name}`,
+            newTab: '(opens in a new tab)',
+            allTitle: 'All projects',
+            allIntro: 'Newest first.',
+            archive: (from, to, n) => `Archive: studies from ${from} to ${to} (${n})`,
+            experienceTitle: 'Experience',
+            stackTitle: 'Stack',
+            stackIntro: 'Only what shows up in the projects.',
+            contactTitle: "Let's talk",
+            email: 'Email',
         },
         startMenu: {
             start: 'Start',
@@ -180,8 +307,7 @@ const translations = {
             apps: 'Apps',
             power: 'Power',
             powerOptions: 'Power options',
-            lock: 'Lock',
-            restart: 'Restart',
+            exit: 'Back to the mode choice',
         },
         taskBar: { showDesktop: 'Show desktop' },
         explorer: {
@@ -189,12 +315,21 @@ const translations = {
             maximize: 'Maximize',
             restore: 'Restore',
             close: 'Close',
+            back: 'Back',
             thisPc: 'This PC',
             placeholder: 'Under construction...',
         },
 
+        about: {
+            greeting: "Hi, I'm",
+            infoTitle: 'Details',
+            wakatimeTitle: 'Languages I use the most (WakaTime)',
+        },
         projects: {
+            featured: 'Featured',
             title: 'Timeline',
+            titleIntro: 'Newest first.',
+            archive: (from, to, n) => `Archive: studies from ${from} to ${to} (${n})`,
             preview: (name) => `Preview of ${name}`,
             repository: 'Repository',
             demo: 'Live demo',

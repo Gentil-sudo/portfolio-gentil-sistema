@@ -1,0 +1,32 @@
+.languageSwitch {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: var(--switch-bg, var(--card-bg));
+    border: 1px solid var(--switch-border, var(--card-border));
+    border-radius: 999px;
+}
+
+.languageSwitch button {
+    min-width: 40px;
+    min-height: 32px;
+    padding: 4px 12px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--switch-text, var(--text));
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.languageSwitch button:hover {
+    background-color: var(--switch-hover, var(--surface-soft));
+}
+
+.languageSwitch button[aria-pressed='true'] {
+    color: var(--switch-active-text, #fff);
+    background-color: var(--switch-active, var(--accent-strong));
+}

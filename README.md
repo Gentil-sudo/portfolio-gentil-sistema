@@ -1,25 +1,27 @@
 # Portfólio · Enzo Gentil
 
-Meu portfólio pessoal em formato de **sistema operacional**: o site liga com uma tela de boot, passa pela tela de login e abre uma área de trabalho com ícones, janelas, barra de tarefas e menu Iniciar.
+Meu portfólio pessoal, com uma entrada e dois jeitos de ver o mesmo conteúdo: um **modo recrutador** (uma página só, direta) e uma **visualização interativa** em formato de sistema operacional.
 
-🔗 **Acesse:** [portfolio-gentil-sistema.vercel.app](https://portfolio-gentil-sistema.vercel.app)
+🔗 **Acesse:** [portfolio-gentil-sistema.vercel.app](https://portfolio-gentil-sistema.vercel.app) · direto no resumo: [?modo=recrutador](https://portfolio-gentil-sistema.vercel.app/?modo=recrutador)
 
-Sou estudante de Engenharia de Software na PUC Minas. Aqui ficam meus projetos, minhas experiências, as linguagens que mais uso (direto do WakaTime) e um formulário de contato.
+Sou estudante de Engenharia de Software na PUC Minas. Aqui ficam meus projetos, minhas experiências, meu currículo e as linguagens que mais uso (direto do WakaTime).
 
 ## Funcionalidades
 
-- **Experiência de desktop**: boot, login, área de trabalho, janelas que abrem, minimizam e fecham, barra de tarefas e menu Iniciar com as opções bloquear e reiniciar.
-- **Apps**: Projetos, Experiências, Sobre Mim e Contato.
-- **Tema claro e escuro**: a escolha fica salva no navegador.
-- **Português e inglês em todo o sistema**: dá para trocar o idioma na tela de login, na área de trabalho ou na barra de tarefas. A escolha fica salva, e na primeira visita vale o idioma do navegador.
-- **Estatísticas do WakaTime**: tempo programando, linguagens, editores, sistemas e projetos, com períodos de 7 dias até "desde sempre". Ferramentas de IA ficam de fora da lista de editores.
-- **Codando agora**: mostra em que projeto estou mexendo no editor naquele momento, a partir dos heartbeats do WakaTime.
+- **Entrada única**: uma tela de carregamento curta e a escolha do modo. A escolha pode ficar salva, e os links `?modo=recrutador` e `?modo=so` (ou `/recrutador` e `/so`) pulam a tela de escolha. Cada modo tem um botão para ir ao outro.
+- **Modo recrutador**: página única com destaques em formato de mini estudo de caso, todos os projetos, experiência, stack e contato. Funciona a partir de 360 px e imprime de forma legível.
+- **Visualização comum (SO)**: área de trabalho com a janela Destaques já aberta, janelas que abrem, minimizam e maximizam, barra de tarefas e menu Iniciar. No celular, as janelas abrem em tela cheia, como apps.
+- **Uma fonte de conteúdo**: os dois modos leem os mesmos arquivos de `src/content/`.
+- **Tema claro e escuro** e **português e inglês** em tudo, com a escolha salva no navegador.
+- **Currículo em PDF** nos dois idiomas.
+- **Linguagens do WakaTime** (último ano ou todo o tempo), lidas no servidor.
 - **Formulário de contato** enviado pelo [Web3Forms](https://web3forms.com), sem backend próprio.
 
 ## Tecnologias
 
-- [React 19](https://react.dev) + [Vite](https://vite.dev)
+- [React 19](https://react.dev) + [Vite](https://vite.dev), cada modo carregado sob demanda
 - CSS puro, um arquivo por componente
+- [Inter](https://rsms.me/inter/) e [Space Grotesk](https://floriankarsten.github.io/space-grotesk/) servidas pelo próprio site ([Fontsource](https://fontsource.org))
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [Vercel Functions](https://vercel.com/docs/functions) para a API do WakaTime
 - [oxlint](https://oxc.rs) para o lint
@@ -83,22 +85,26 @@ O navegador nunca fala direto com o WakaTime: ele chama `/api/wakatime` e `/api/
 ```
 Portfolio/
 ├── api/                  # Vercel Functions (/api/wakatime, /api/codando)
-├── public/
+├── public/               # currículos em PDF, favicon, imagem de compartilhamento
 ├── scripts/
 │   └── wakatime-oauth.mjs
 ├── src/
-│   ├── components/       # boot, login, home, taskBar, startMenu, explorer, apps...
+│   ├── content/          # conteúdo dos dois modos: perfil, projetos, experiência, stack
+│   ├── modes/
+│   │   ├── recrutador/   # Modo recrutador (página única)
+│   │   └── so/           # Visualização comum (área de trabalho, janelas, barra de tarefas)
+│   ├── shared/           # carregamento, tela de escolha, PT/EN, tema, troca de modo
 │   ├── config/           # wakatimeConfig.js
-│   ├── data/             # textos: projetos, experiências, sobre, contatos
 │   ├── hooks/            # useTheme
 │   ├── i18n/             # idioma global e textos da interface (pt/en)
 │   ├── services/         # chamadas às rotas /api
-│   ├── App.jsx
+│   ├── App.jsx           # carregamento → escolha → modo
 │   └── main.jsx
+├── vercel.json           # rotas /so e /recrutador
 └── vite.config.js
 ```
 
-Para mudar o conteúdo do portfólio, basta editar os arquivos em `src/data/`. Os textos têm uma versão em português e outra em inglês (`{ pt: '...', en: '...' }`). Os textos da interface ficam em `src/i18n/translations.js`.
+Para mudar o conteúdo do portfólio, basta editar os arquivos em `src/content/`: um projeto alterado ali muda nos dois modos. Os textos têm uma versão em português e outra em inglês (`{ pt: '...', en: '...' }`). Os textos da interface ficam em `src/i18n/translations.js`.
 
 ## Contato
 

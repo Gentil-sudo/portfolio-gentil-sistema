@@ -1,112 +1,103 @@
-import { useCallback, useState } from 'react'
-import Home from './components/home/Home'
-import TaskBar from './components/taskBar/TaskBar'
-import Explorer from './components/explorer/Explorer'
-import Projects from './components/projects/Projects'
-import Experiences from './components/experiences/Experiences'
-import About from './components/about/About'
-import Contact from './components/contact/Contact'
-import Boot from './components/boot/Boot'
-import Login from './components/login/Login'
-import apps from './data/apps'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
+import Boot from './shared/boot/Boot'
+import Choice from './shared/choice/Choice'
+import perfil from './content/perfil'
 import useTheme from './hooks/useTheme'
 import { useLanguage } from './i18n/LanguageContext'
+import {
+    forgetMode,
+    getInitialMode,
+    getSavedMode,
+    otherMode,
+    readModeFromUrl,
+    saveMode,
+    urlForMode,
+} from './shared/mode'
 
-const SESSION_KEY = 'portfolio-signed-in'
+// Cada modo é baixado só quando abre: quem chega pelo link do recrutador
+// não carrega o SO (e vice-versa)
+const SoMode = lazy(() => import('./modes/so/SoMode'))
+const RecruiterMode = lazy(() => import('./modes/recrutador/RecruiterMode'))
 
-function getInitialStage() {
-    try {
-        if (sessionStorage.getItem(SESSION_KEY)) return 'desktop'
-    } catch {}
-    return 'boot'
+// A tela de escolha já abre com a foto carregada
+const BOOT_PRELOAD = [perfil.photo]
+
+function goTo(mode) {
+    window.history.pushState(null, '', urlForMode(mode))
+    window.scrollTo(0, 0)
 }
 
-const appContents = {
-    projetos: <Projects />,
-    experiencias: <Experiences />,
-    contato: <Contact />,
-    sobre: <About />,
-}
-
+// Entrada única: carregamento → tela de escolha → um dos dois modos.
+// Quem chega com ?modo= (ou /so, /recrutador) ou já tem um modo salvo
+// vai direto para ele, sem carregamento.
 function App() {
-    const [openAppId, setOpenAppId] = useState(null)
-    const [minimized, setMinimized] = useState(false)
     const { theme, toggleTheme } = useTheme()
-    const { t } = useLanguage()
-    const [stage, setStage] = useState(getInitialStage)
+    const [mode, setMode] = useState(getInitialMode)
+    const [booting, setBooting] = useState(() => getInitialMode() === null)
 
-    const handleBootDone = useCallback(() => setStage('login'), [])
-    const handleLoginDone = useCallback(() => {
-        setStage('desktop')
-        try {
-            sessionStorage.setItem(SESSION_KEY, '1')
-        } catch {}
+    const handleBootDone = useCallback(() => setBooting(false), [])
+    const { t } = useLanguage()
+
+    // Título da aba e descrição por modo e idioma (o padrão em português,
+    // para quem não roda JavaScript, fica no index.html)
+    useEffect(() => {
+        document.title = t.seo.titles[mode ?? 'choice']
+        document.querySelector('meta[name="description"]')?.setAttribute('content', t.seo.description)
+    }, [mode, t])
+
+    useEffect(() => {
+        // Modo salvo e URL sem modo: deixa o endereço explícito, para o
+        // "voltar" do navegador levar de um modo à tela de escolha
+        const savedMode = getInitialMode()
+        if (savedMode && !readModeFromUrl()) {
+            window.history.replaceState(null, '', urlForMode(savedMode))
+        }
+
+        function handlePopState() {
+            setMode(readModeFromUrl())
+        }
+        window.addEventListener('popstate', handlePopState)
+        return () => window.removeEventListener('popstate', handlePopState)
     }, [])
 
-    function handleLock() {
-        setStage('login')
-        try {
-            sessionStorage.removeItem(SESSION_KEY)
-        } catch {}
+    function handleChoose(nextMode, remember) {
+        if (remember) saveMode(nextMode)
+        else forgetMode()
+        goTo(nextMode)
+        setMode(nextMode)
     }
 
-    function handleRestart() {
-        handleClose()
-        handleLock()
-        setStage('boot')
+    function handleSwitchMode() {
+        const nextMode = otherMode(mode)
+        // Quem pediu para lembrar continua lembrando, agora do outro modo
+        if (getSavedMode()) saveMode(nextMode)
+        goTo(nextMode)
+        setMode(nextMode)
     }
 
-    const openApp = apps.find((app) => app.id === openAppId)
-    const content = openApp && appContents[openApp.id]
-
-    function handleOpen(id) {
-        if (id === openAppId && !minimized) {
-            setMinimized(true)
-            return
-        }
-        setOpenAppId(id)
-        setMinimized(false)
-    }
-
-    function handleLaunch(id) {
-        setOpenAppId(id)
-        setMinimized(false)
-    }
-
-    function handleClose() {
-        setOpenAppId(null)
-        setMinimized(false)
+    function handleExit() {
+        forgetMode()
+        goTo(null)
+        setMode(null)
     }
 
     return (
         <>
-            <main className='main'>
-                <Home apps={apps} onOpen={handleOpen} theme={theme} onToggleTheme={toggleTheme} />
-                {openApp && (
-                    <Explorer
-                        key={openApp.id}
-                        app={openApp}
-                        hidden={minimized}
-                        onClose={handleClose}
-                        onMinimize={() => setMinimized(true)}
-                    >
-                        {content ?? <p className='explorer-placeholder'>{t.explorer.placeholder}</p>}
-                    </Explorer>
+            <Suspense fallback={null}>
+                {mode === 'so' && (
+                    <SoMode
+                        theme={theme}
+                        onToggleTheme={toggleTheme}
+                        onSwitchMode={handleSwitchMode}
+                        onExit={handleExit}
+                    />
                 )}
-            </main>
-            <TaskBar
-                apps={apps}
-                activeAppId={openAppId}
-                onOpen={handleOpen}
-                theme={theme}
-                onToggleTheme={toggleTheme}
-                onLaunch={handleLaunch}
-                onLock={handleLock}
-                onRestart={handleRestart}
-                onShowDesktop={() => setMinimized(true)}
-            />
-            {stage !== 'desktop' && <Login onDone={handleLoginDone} />}
-            {stage === 'boot' && <Boot onDone={handleBootDone} />}
+                {mode === 'recrutador' && (
+                    <RecruiterMode theme={theme} onToggleTheme={toggleTheme} onSwitchMode={handleSwitchMode} />
+                )}
+            </Suspense>
+            {mode === null && <Choice onChoose={handleChoose} />}
+            {booting && <Boot onDone={handleBootDone} preload={BOOT_PRELOAD} />}
         </>
     )
 }

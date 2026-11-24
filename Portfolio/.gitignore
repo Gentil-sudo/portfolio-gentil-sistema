@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Plano de trabalho pessoal (fica só na máquina)
+src/plano.txt
