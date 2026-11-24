@@ -384,6 +384,24 @@
     color: var(--r-muted);
 }
 
+/* Tags da stack principal: contorno na cor de destaque, para não se
+   confundir com o "Em andamento" (fundo preenchido) */
+.r-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+}
+
+.r-card-tags li {
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--r-accent);
+    border: 1px solid var(--r-accent);
+    border-radius: 999px;
+}
+
 .r-card-title {
     font-size: 24px;
     font-weight: 700;

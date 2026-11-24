@@ -37,6 +37,10 @@ function ProjectCard({ project, priority }) {
                     {project.date && <span>{project.date.slice(0, 4)}</span>}
                     {project.inProgress && <span className='r-tag'>{text.inProgress}</span>}
                 </p>
+                {/* Stack principal logo no topo: quem passa rápido já vê as tecnologias */}
+                <ul className='r-card-tags' aria-label={text.mainStack}>
+                    {project.mainStack.map((tech) => <li key={tech}>{tech}</li>)}
+                </ul>
                 <h3 id={`r-card-${project.id}`} className='r-card-title'>{name}</h3>
                 <p className='r-card-description'>{localize(project.description, language)}</p>
 
