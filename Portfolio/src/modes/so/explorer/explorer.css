@@ -7,13 +7,19 @@
     width: min(900px, 90vw);
     height: min(600px, 75vh);
     background-color: var(--surface);
-    backdrop-filter: blur(12px);
     border: 2px solid transparent;
     border-image: linear-gradient(135deg, #e0449e 0%, #a855b0 35%, #6a4c93 65%, #4a5a8a 100%) 1;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     color: var(--text);
     z-index: 10;
     animation: explorer-open 0.18s ease-out;
+}
+
+/* A janela recebe o foco ao abrir (para o teclado), mas não é um controle:
+   sem contorno nela, só nos botões e links de dentro */
+.explorer-window:focus,
+.explorer-window:focus-visible {
+    outline: none;
 }
 
 .explorer-maximized {
@@ -126,16 +132,63 @@
     color: var(--text-muted);
 }
 
+/* Botão de voltar: só no celular */
+.explorer-back {
+    display: none;
+}
+
+/* Celular: a janela vira um app em tela cheia, sem arrastar,
+   com "voltar" no lugar de minimizar/maximizar/fechar */
 @media (max-width: 768px) {
     .explorer-window {
         top: 0;
         left: 0;
         width: 100vw;
         height: calc(100dvh - 64px);
+        border: none;
+        box-shadow: none;
         transform: none !important;
+        animation: none;
     }
 
     .explorer-titleBar {
+        justify-content: flex-start;
+        height: 52px;
+        padding-left: 4px;
         cursor: default;
+    }
+
+    .explorer-back {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+        color: var(--text);
+        background: none;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .explorer-title {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .explorer-controls,
+    .explorer-pathBar {
+        display: none;
+    }
+
+    .explorer-content {
+        padding: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .explorer-window {
+        animation: none;
     }
 }

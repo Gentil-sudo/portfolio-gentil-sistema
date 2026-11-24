@@ -8,10 +8,18 @@ const translations = {
         pageTitle: 'Enzo Gentil | Portfólio',
 
         apps: {
+            destaques: 'Destaques',
             projetos: 'Projetos',
-            experiencias: 'Experiências',
+            experiencias: 'Experiência',
+            sobre: 'Sobre mim',
+            curriculo: 'Currículo.pdf',
             contato: 'Contato',
-            sobre: 'Sobre Mim',
+        },
+        highlights: {
+            photo: (name) => `Foto de ${name}`,
+            resume: 'Baixar currículo',
+            featured: 'Projetos em destaque',
+            allProjects: 'Ver todos os projetos',
         },
 
         language: {
@@ -86,6 +94,7 @@ const translations = {
             maximize: 'Maximizar',
             restore: 'Restaurar',
             close: 'Fechar',
+            back: 'Voltar',
             thisPc: 'Este Computador',
             placeholder: 'Em construção...',
         },
@@ -96,7 +105,10 @@ const translations = {
             wakatimeTitle: 'Linguagens que mais uso (WakaTime)',
         },
         projects: {
+            featured: 'Em destaque',
             title: 'Linha do tempo',
+            titleIntro: 'Do mais novo para o mais antigo.',
+            archive: (from, to, n) => `Arquivo: estudos de ${from} a ${to} (${n})`,
             preview: (name) => `Prévia do projeto ${name}`,
             repository: 'Repositório',
             demo: 'Ver online',
@@ -133,7 +145,7 @@ const translations = {
                 last_30_days: '30 dias',
                 last_6_months: '6 meses',
                 last_year: '1 ano',
-                all_time: 'Desde sempre',
+                all_time: 'Todo o tempo',
             },
             period: 'Período',
             profile: 'Ver perfil no WakaTime',
@@ -202,10 +214,18 @@ const translations = {
         pageTitle: 'Enzo Gentil | Portfolio',
 
         apps: {
+            destaques: 'Highlights',
             projetos: 'Projects',
             experiencias: 'Experience',
+            sobre: 'About me',
+            curriculo: 'Resume.pdf',
             contato: 'Contact',
-            sobre: 'About Me',
+        },
+        highlights: {
+            photo: (name) => `Photo of ${name}`,
+            resume: 'Download résumé',
+            featured: 'Featured projects',
+            allProjects: 'See all projects',
         },
 
         language: {
@@ -280,6 +300,7 @@ const translations = {
             maximize: 'Maximize',
             restore: 'Restore',
             close: 'Close',
+            back: 'Back',
             thisPc: 'This PC',
             placeholder: 'Under construction...',
         },
@@ -290,7 +311,10 @@ const translations = {
             wakatimeTitle: 'Languages I use the most (WakaTime)',
         },
         projects: {
+            featured: 'Featured',
             title: 'Timeline',
+            titleIntro: 'Newest first.',
+            archive: (from, to, n) => `Archive: studies from ${from} to ${to} (${n})`,
             preview: (name) => `Preview of ${name}`,
             repository: 'Repository',
             demo: 'Live demo',

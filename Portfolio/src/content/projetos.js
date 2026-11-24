@@ -8,7 +8,7 @@
 //   stack              tecnologias usadas
 //   repo               nome do repositório no GitHub (owner: dono, se não for o meu); null = sem repo público
 //   demo               link do deploy, se houver
-//   image              prévia (captura 800×500 em src/assets/projetos); sem ela, usa a imagem Open Graph do GitHub
+//   image              captura 800×500 em src/assets/projetos (opcional)
 //   featured           true = aparece nos destaques; featuredOrder = posição neles
 //   context            'pessoal' | 'puc' | 'equipe' (rótulos em src/i18n/translations.js)
 //   team               tamanho da equipe (null = sozinho ou ainda não informado)
@@ -337,7 +337,9 @@ const projetos = [
     demo: null,
     ...project,
     github: project.repo ? `https://github.com/${owner}/${project.repo}` : null,
-    image: project.image ?? (project.repo ? `https://opengraph.githubassets.com/1/${owner}/${project.repo}` : null),
+    // Só capturas locais: a imagem automática do GitHub (opengraph) às vezes
+    // falha (erro 429) e deixava a prévia quebrada
+    image: project.image ?? null,
 }))
 
 // Mais novo primeiro; projetos ainda sem data vão para o fim

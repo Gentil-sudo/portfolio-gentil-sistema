@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import { MdLogout, MdOutlineArticle, MdOutlinePowerSettingsNew } from "react-icons/md";
 import Logo from '../../../assets/imgs/logo.png'
 import perfil from '../../../content/perfil'
-import { useLanguage } from '../../../i18n/LanguageContext'
+import { localize, useLanguage } from '../../../i18n/LanguageContext'
 
 function StartMenu({ apps, onOpen, onSwitchMode, onExit }) {
     const [open, setOpen] = useState(false)
     const [powerOpen, setPowerOpen] = useState(false)
     const menuRef = useRef(null)
-    const { t } = useLanguage()
+    const { t, language } = useLanguage()
 
     function closeMenu() {
         setOpen(false)
@@ -54,7 +54,19 @@ function StartMenu({ apps, onOpen, onSwitchMode, onExit }) {
                 <div className='startMenu-panel' role='menu' aria-label={t.startMenu.menu}>
                     <p className='startMenu-section'>{t.startMenu.apps}</p>
                     <div className='startMenu-apps'>
-                        {apps.map(({ id, icon: Icon }) => (
+                        {apps.map(({ id, icon: Icon, download }) => download ? (
+                            <a
+                                key={id}
+                                className='startMenu-app'
+                                role='menuitem'
+                                href={localize(download, language)}
+                                download
+                                onClick={closeMenu}
+                            >
+                                <Icon />
+                                <span>{t.apps[id]}</span>
+                            </a>
+                        ) : (
                             <button key={id} className='startMenu-app' role='menuitem' onClick={() => run(() => onOpen(id))}>
                                 <Icon />
                                 <span>{t.apps[id]}</span>

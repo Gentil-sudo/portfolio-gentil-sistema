@@ -4,18 +4,25 @@
   margin: 0;
 }
 
+/* Contraste conferido (texto ≥ 4,5:1 sobre --surface e --page-bg).
+   Rosa e roxo só como destaque: barra de título, links, tags, botão principal. */
 :root,
 :root[data-theme='dark'] {
-  --overlay: rgba(0, 0, 0, 0.4);
-  --desktop-icon: #a855b0;
-  --surface: rgba(20, 12, 40, 0.85);
-  --surface-soft: rgba(168, 85, 176, 0.12);
-  --taskbar-base: rgba(10, 6, 24, 0.35);
-  --text: #e8e0f0;
-  --text-muted: #b9a8cc;
-  --border-soft: rgba(168, 85, 176, 0.3);
+  /* Área de trabalho: papel de parede estático, escuro e pontilhado */
+  --desktop-bg: #0c0914;
+  --desktop-dot: rgba(197, 138, 210, 0.2);
+  --desktop-glow: rgba(224, 68, 158, 0.14);
+  --desktop-glow-2: rgba(106, 76, 147, 0.2);
+  --desktop-icon: #e07ac0;
+  /* Janelas opacas */
+  --surface: #18131f;
+  --surface-soft: rgba(197, 138, 210, 0.08);
+  --taskbar-base: rgba(16, 12, 26, 0.94);
+  --text: #ece6f3;
+  --text-muted: #b6abc4;
+  --border-soft: rgba(197, 138, 210, 0.24);
   --accent: #e0449e;
-  --accent-2: #a855b0;
+  --accent-2: #c58ad2;
   /* Telas fora do SO (escolha de modo): fundo e cartões opacos */
   --page-bg: #0f0a1c;
   --card-bg: #1a1230;
@@ -27,14 +34,17 @@
 }
 
 :root[data-theme='light'] {
-  --overlay: rgba(120, 60, 140, 0.08);
-  --desktop-icon: #f08ccf;
-  --surface: rgba(232, 218, 246, 0.88);
-  --surface-soft: rgba(168, 85, 176, 0.14);
-  --taskbar-base: rgba(238, 228, 250, 0.82);
-  --text: #2a1840;
-  --text-muted: #6a5a80;
-  --border-soft: rgba(106, 76, 147, 0.3);
+  --desktop-bg: #efe9f6;
+  --desktop-dot: rgba(106, 76, 147, 0.22);
+  --desktop-glow: rgba(224, 68, 158, 0.1);
+  --desktop-glow-2: rgba(106, 76, 147, 0.12);
+  --desktop-icon: #b02a80;
+  --surface: #ffffff;
+  --surface-soft: rgba(138, 61, 147, 0.06);
+  --taskbar-base: rgba(255, 255, 255, 0.94);
+  --text: #241733;
+  --text-muted: #5f5470;
+  --border-soft: rgba(106, 76, 147, 0.22);
   --accent: #c42a85;
   --accent-2: #8a3d93;
   --page-bg: #f6f1fb;
@@ -55,16 +65,15 @@ body {
   outline-offset: 2px;
 }
 
+/* Área de trabalho do modo SO: papel de parede só com CSS (sem imagem) */
 .main {
   height: 100vh;
   height: 100dvh;
   width: 100%;
+  background-color: var(--desktop-bg);
   background-image:
-  linear-gradient(var(--overlay), var(--overlay)),
-  url('./assets/videos/fundo.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 0.3s ease;
+    radial-gradient(var(--desktop-dot) 1px, transparent 1.5px),
+    radial-gradient(ellipse at 15% 10%, var(--desktop-glow), transparent 55%),
+    radial-gradient(ellipse at 90% 95%, var(--desktop-glow-2), transparent 55%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
 }

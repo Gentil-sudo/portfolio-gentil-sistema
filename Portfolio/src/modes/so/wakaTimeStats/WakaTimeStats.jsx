@@ -27,33 +27,37 @@ import "./WakaTimeStats.css";
  * <WakaTimeStats />
  * <WakaTimeStats initialRange="all_time" showProjects={false} />
  * <WakaTimeStats showCodingNow={false} />
+ * <WakaTimeStats ranges={["last_year", "all_time"]} showKpis={false} showBreakdown={false} />
+ *   → só a distribuição de linguagens (como no "Sobre mim" do portfólio)
  */
 
 const OS_NAMES = { Mac: "macOS" };
+
+// Erros cujas mensagens falam de .env, token e npm (ver ErrorBox)
+const DEV_ONLY_ERRORS = ["missing_config", "invalid_token", "no_api"];
 
 const { RANGES, DEFAULT_RANGE, PROFILE_URL, MAX_LANGUAGES, HIDDEN_LANGUAGES } =
   WAKATIME_CONFIG;
 
 function useWakaTime(range) {
-  const [state, setState] = useState({ status: "loading", data: null, error: null });
+  // Resultado da última busca, junto com o período a que ele se refere
+  const [result, setResult] = useState({ range: null, data: null, error: null });
 
   useEffect(() => {
     let active = true;
-    // Mantém os dados antigos na tela enquanto o novo período carrega
-    setState((old) => ({ ...old, status: "loading", error: null }));
 
     fetchWakaTimeStats(range)
-      .then((data) => active && setState({ status: "ready", data, error: null }))
-      .catch(
-        (error) => active && setState((old) => ({ status: "error", data: old.data, error }))
-      );
+      .then((data) => active && setResult({ range, data, error: null }))
+      .catch((error) => active && setResult((old) => ({ range, data: old.data, error })));
 
     return () => {
       active = false;
     };
   }, [range]);
 
-  return state;
+  // Período novo ainda sem resposta = carregando (os dados antigos ficam na tela)
+  const status = result.range !== range ? "loading" : result.error ? "error" : "ready";
+  return { status, data: result.data, error: status === "error" ? result.error : null };
 }
 
 /* =====================================================================
@@ -139,6 +143,15 @@ function MiniList({ title, items, rename = {}, locale }) {
 function ErrorBox({ error, t }) {
   const message = t.errors[error?.code] ?? error?.message ?? t.loadError;
   const hint = t.hints[error?.code];
+  // Erros de configuração só interessam a quem mantém o site: em produção o
+  // visitante vê a mensagem genérica, sem instruções de .env e npm
+  if (!import.meta.env.DEV && DEV_ONLY_ERRORS.includes(error?.code)) {
+    return (
+      <div className="waka-message error" role="alert">
+        <strong>{t.loadError}</strong>
+      </div>
+    );
+  }
 
   return (
     <div className={`waka-message ${error?.code === "pending" ? "warning" : "error"}`} role="alert">
@@ -168,9 +181,12 @@ function Skeleton() {
 
 export default function WakaTimeStats({
   initialRange = DEFAULT_RANGE,
+  ranges = RANGES,
   showRangePicker = true,
   showProjects = true,
   showCodingNow = true,
+  showKpis = true, // tempo total, média diária, hoje, melhor dia
+  showBreakdown = true, // editores e sistemas operacionais
 }) {
   const [range, setRange] = useState(initialRange);
   const { status, data, error } = useWakaTime(range);
@@ -203,7 +219,7 @@ export default function WakaTimeStats({
       <div className="waka-toolbar">
         {showRangePicker && (
           <div className="waka-ranges" role="group" aria-label={t.period}>
-            {RANGES.map((value) => (
+            {ranges.map((value) => (
               <button
                 key={value}
                 type="button"
@@ -230,6 +246,7 @@ export default function WakaTimeStats({
       {data && (
         <div className={status === "loading" ? "waka-body updating" : "waka-body"}>
           {/* ---------- Indicadores ---------- */}
+          {showKpis && (
           <ul className="waka-kpis">
             <Kpi
               icon={FiClock}
@@ -264,26 +281,29 @@ export default function WakaTimeStats({
               note={data.bestDay ? formatDate(data.bestDay.date, locale) : t.noData}
             />
           </ul>
+          )}
 
           {/* ---------- Linguagens ---------- */}
           {languages.length > 0 ? (
             <>
               <LanguageStack languages={languages} locale={locale} />
-              <div className="waka-grid">
+              <div className={showBreakdown ? "waka-grid" : "waka-grid waka-grid-single"}>
                 <section className="waka-card">
                   <h3>{t.languages}</h3>
                   <LanguageList languages={top} rest={rest} t={t} locale={locale} />
                 </section>
 
-                <aside className="waka-card waka-side">
-                  <MiniList title={t.editors} items={data.editors} locale={locale} />
-                  <MiniList
-                    title={t.operatingSystems}
-                    items={data.operatingSystems}
-                    rename={OS_NAMES}
-                    locale={locale}
-                  />
-                </aside>
+                {showBreakdown && (
+                  <aside className="waka-card waka-side">
+                    <MiniList title={t.editors} items={data.editors} locale={locale} />
+                    <MiniList
+                      title={t.operatingSystems}
+                      items={data.operatingSystems}
+                      rename={OS_NAMES}
+                      locale={locale}
+                    />
+                  </aside>
+                )}
               </div>
             </>
           ) : (

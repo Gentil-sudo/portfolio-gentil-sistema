@@ -207,6 +207,11 @@
   gap: 1.25rem;
 }
 
+/* Só a lista de linguagens (sem editores e sistemas) */
+.waka-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .waka-card {
   padding: 16px 20px;
 

@@ -2,29 +2,23 @@ import { useState } from 'react'
 import Home from './home/Home'
 import TaskBar from './taskBar/TaskBar'
 import Explorer from './explorer/Explorer'
+import Highlights from './highlights/Highlights'
 import Projects from './projects/Projects'
 import Experiences from './experiences/Experiences'
 import About from './about/About'
 import Contact from './contact/Contact'
-import apps from './apps'
+import apps, { FIRST_APP, windowApps } from './apps'
 import { useLanguage } from '../../i18n/LanguageContext'
 
-const appContents = {
-    projetos: <Projects />,
-    experiencias: <Experiences />,
-    contato: <Contact />,
-    sobre: <About />,
-}
-
 // Visualização comum: o portfólio em formato de sistema operacional.
+// Entra direto na área de trabalho, com a janela Destaques já aberta.
 // onSwitchMode: vai para o Modo recrutador · onExit: volta à tela de escolha
 function SoMode({ theme, onToggleTheme, onSwitchMode, onExit }) {
-    const [openAppId, setOpenAppId] = useState(null)
+    const [openAppId, setOpenAppId] = useState(FIRST_APP)
     const [minimized, setMinimized] = useState(false)
     const { t } = useLanguage()
 
-    const openApp = apps.find((app) => app.id === openAppId)
-    const content = openApp && appContents[openApp.id]
+    const openApp = windowApps.find((app) => app.id === openAppId)
 
     function handleOpen(id) {
         if (id === openAppId && !minimized) {
@@ -45,6 +39,17 @@ function SoMode({ theme, onToggleTheme, onSwitchMode, onExit }) {
         setMinimized(false)
     }
 
+    function renderContent(id) {
+        switch (id) {
+            case 'destaques': return <Highlights onSwitchMode={onSwitchMode} onOpenApp={handleLaunch} />
+            case 'projetos': return <Projects />
+            case 'experiencias': return <Experiences />
+            case 'sobre': return <About />
+            case 'contato': return <Contact />
+            default: return <p className='explorer-placeholder'>{t.explorer.placeholder}</p>
+        }
+    }
+
     return (
         <>
             <main className='main'>
@@ -57,12 +62,13 @@ function SoMode({ theme, onToggleTheme, onSwitchMode, onExit }) {
                         onClose={handleClose}
                         onMinimize={() => setMinimized(true)}
                     >
-                        {content ?? <p className='explorer-placeholder'>{t.explorer.placeholder}</p>}
+                        {renderContent(openApp.id)}
                     </Explorer>
                 )}
             </main>
             <TaskBar
-                apps={apps}
+                apps={windowApps}
+                startMenuApps={apps}
                 activeAppId={openAppId}
                 onOpen={handleOpen}
                 theme={theme}

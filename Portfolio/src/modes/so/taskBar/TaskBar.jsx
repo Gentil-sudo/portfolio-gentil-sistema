@@ -5,14 +5,14 @@ import LanguageButton from '../../../shared/languageButton/LanguageButton'
 import StartMenu from "../startMenu/StartMenu"
 import { useLanguage } from '../../../i18n/LanguageContext'
 
-function TaskBar({ apps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, onSwitchMode, onExit, onShowDesktop }) {
+function TaskBar({ apps, startMenuApps, activeAppId, onOpen, theme, onToggleTheme, onLaunch, onSwitchMode, onExit, onShowDesktop }) {
     const { t } = useLanguage()
 
     return (
         <nav className="taskBar-box">
             <div className='taskBar-elements'>
                 <div className='taskBar-element-Home'>
-                    <StartMenu apps={apps} onOpen={onLaunch} onSwitchMode={onSwitchMode} onExit={onExit} />
+                    <StartMenu apps={startMenuApps} onOpen={onLaunch} onSwitchMode={onSwitchMode} onExit={onExit} />
                 </div>
                 <div className='taskBar-apps'>
                     <div className='taskBar-btns-box'>

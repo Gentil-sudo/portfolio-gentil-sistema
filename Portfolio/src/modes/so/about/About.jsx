@@ -53,7 +53,16 @@ function About () {
 
             <footer className='about-footer'>
                 <h3 className='about-info-title'>{labels.wakatimeTitle}</h3>
-                <WakaTimeStats />
+                {/* Só a distribuição de linguagens: sem "codando agora", sem
+                    tempo de hoje nem totais da semana */}
+                <WakaTimeStats
+                    initialRange='last_year'
+                    ranges={['last_year', 'all_time']}
+                    showCodingNow={false}
+                    showKpis={false}
+                    showBreakdown={false}
+                    showProjects={false}
+                />
             </footer>
         </div>
     )
