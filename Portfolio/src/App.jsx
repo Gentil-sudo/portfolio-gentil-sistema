@@ -3,6 +3,7 @@ import Boot from './shared/boot/Boot'
 import Choice from './shared/choice/Choice'
 import perfil from './content/perfil'
 import useTheme from './hooks/useTheme'
+import { useLanguage } from './i18n/LanguageContext'
 import {
     forgetMode,
     getInitialMode,
@@ -35,6 +36,14 @@ function App() {
     const [booting, setBooting] = useState(() => getInitialMode() === null)
 
     const handleBootDone = useCallback(() => setBooting(false), [])
+    const { t } = useLanguage()
+
+    // Título da aba e descrição por modo e idioma (o padrão em português,
+    // para quem não roda JavaScript, fica no index.html)
+    useEffect(() => {
+        document.title = t.seo.titles[mode ?? 'choice']
+        document.querySelector('meta[name="description"]')?.setAttribute('content', t.seo.description)
+    }, [mode, t])
 
     useEffect(() => {
         // Modo salvo e URL sem modo: deixa o endereço explícito, para o

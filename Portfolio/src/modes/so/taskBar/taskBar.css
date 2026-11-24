@@ -52,6 +52,7 @@
 .home-img {
     height: 50px;
     width: 60px;
+    object-fit: contain;
     background:none;
     border-radius: 12px;
 }

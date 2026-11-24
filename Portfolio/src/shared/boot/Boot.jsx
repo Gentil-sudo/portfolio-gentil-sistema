@@ -1,6 +1,6 @@
 import './boot.css'
 import { useEffect, useState } from 'react'
-import Logo from '../../assets/imgs/logo.png'
+import Logo from '../../assets/imgs/logo.webp'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 // Some assim que o essencial carrega, sem tempo mínimo artificial.
@@ -53,7 +53,7 @@ function Boot({ onDone, preload }) {
 
     return (
         <div className={`boot ${leaving ? 'boot-leaving' : ''}`} role='status' aria-label={t.boot.loading}>
-            <img src={Logo} alt='' className='boot-logo' />
+            <img src={Logo} alt='' className='boot-logo' width='440' height='240' />
             <div className='boot-spinner' aria-hidden='true'>
                 {[0, 1, 2, 3, 4].map((dot) => (
                     <span key={dot} style={{ animationDelay: `${dot * 0.14}s` }} />

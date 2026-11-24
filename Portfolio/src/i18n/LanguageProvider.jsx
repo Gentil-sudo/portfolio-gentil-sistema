@@ -19,7 +19,6 @@ export function LanguageProvider({ children }) {
 
     useEffect(() => {
         document.documentElement.lang = t.htmlLang
-        document.title = t.pageTitle
         try {
             localStorage.setItem(STORAGE_KEY, language)
         } catch {}

@@ -1,7 +1,7 @@
 import './startMenu.css'
 import { useEffect, useRef, useState } from 'react'
 import { MdLogout, MdOutlineArticle, MdOutlinePowerSettingsNew } from "react-icons/md";
-import Logo from '../../../assets/imgs/logo.png'
+import Logo from '../../../assets/imgs/logo.webp'
 import perfil from '../../../content/perfil'
 import { localize, useLanguage } from '../../../i18n/LanguageContext'
 
@@ -47,7 +47,7 @@ function StartMenu({ apps, onOpen, onSwitchMode, onExit }) {
                 aria-haspopup='menu'
                 onClick={() => (open ? closeMenu() : setOpen(true))}
             >
-                <img src={Logo} alt='' className='home-img' />
+                <img src={Logo} alt='' className='home-img' width='440' height='240' />
             </button>
 
             {open && (
@@ -76,7 +76,7 @@ function StartMenu({ apps, onOpen, onSwitchMode, onExit }) {
 
                     <footer className='startMenu-footer'>
                         <div className='startMenu-user'>
-                            <img src={perfil.photo} alt='' className='startMenu-avatar' />
+                            <img src={perfil.photo} alt='' className='startMenu-avatar' width='320' height='320' />
                             <span>{perfil.name}</span>
                         </div>
 

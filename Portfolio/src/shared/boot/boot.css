@@ -17,6 +17,7 @@
 
 .boot-logo {
     width: min(220px, 50vw);
+    height: auto;
     animation: boot-logo-in 0.8s ease both;
 }
 

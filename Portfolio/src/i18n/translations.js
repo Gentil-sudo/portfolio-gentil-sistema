@@ -5,7 +5,15 @@ const translations = {
     pt: {
         htmlLang: 'pt-BR',
         locale: 'pt-BR',
-        pageTitle: 'Enzo Gentil | Portfólio',
+        // Título da aba e descrição por modo (ver src/App.jsx)
+        seo: {
+            titles: {
+                choice: 'Enzo Gentil — Desenvolvedor web | Portfólio',
+                recrutador: 'Enzo Gentil — Desenvolvedor web | Resumo para recrutadores',
+                so: 'Enzo Gentil — Portfólio interativo',
+            },
+            description: 'Portfólio de Enzo Gentil, estudante de Engenharia de Software na PUC Minas (1º lugar no ProUni). Projetos com React, TypeScript, Java e Spring Boot. Disponível para estágio em Belo Horizonte.',
+        },
 
         apps: {
             destaques: 'Destaques',
@@ -211,7 +219,14 @@ const translations = {
     en: {
         htmlLang: 'en',
         locale: 'en-US',
-        pageTitle: 'Enzo Gentil | Portfolio',
+        seo: {
+            titles: {
+                choice: 'Enzo Gentil — Web developer | Portfolio',
+                recrutador: 'Enzo Gentil — Web developer | Recruiter summary',
+                so: 'Enzo Gentil — Interactive portfolio',
+            },
+            description: 'Portfolio of Enzo Gentil, Software Engineering student at PUC Minas (ranked 1st in ProUni). Projects with React, TypeScript, Java and Spring Boot. Open to internships in Belo Horizonte, Brazil.',
+        },
 
         apps: {
             destaques: 'Highlights',
